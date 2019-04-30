@@ -59,6 +59,7 @@
             <button class="btn_yz" @click="tijiao()">提交</button>
         </div>
         <p style="display:none">{{a}}</p>
+        <a target="_blank" :style="{display:toggle_a}" href="http://wpa.qq.com/msgrd?v=3&uin=944416588&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:944416588:53" alt="点击这里给我发消息" title="点击这里给我发消息"/></a>
     </div>
 </body>
 
@@ -76,6 +77,7 @@
                 { nr: '', col: '' },
                 { nr: '', col: '' },
             ],
+            toggle_a:"none",
             a: 0
         },
         methods: {
@@ -101,9 +103,10 @@
                             toggle_ = false;
                         }
                     }
-                    if(toggle_){
-                        alert("恭喜你！验证码输入正确！你好聪明哦！");
-                    }else{
+                    if (toggle_) {
+                        alert("恭喜你！验证码输入正确！你好聪明哦！现在你可以和我聊天喽！");
+                        this.toggle_a = "block";
+                    } else {
                         alert("请输入正确验证码！");
                     }
                 } else {
