@@ -1,0 +1,126 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>验证码demo</title>
+    <script src="./vue.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .yz_input {
+            margin-top: 40px;
+            width: 200px;
+            box-sizing: border-box;
+        }
+
+        .yanzheng {
+            width: 200px;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+
+        .yz_ma {
+            float: left;
+            width: 100px;
+            font-size: 25px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+        }
+
+        .btn_yz {
+            box-sizing: border-box;
+            width: 50px;
+            float: left;
+            height: 40px;
+        }
+
+        .box {
+            width: 200px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <input type="text" placeholder="请输入验证码" class="yz_input" v-model="yz_input">
+        <div class="yanzheng">
+            <div class="yz_ma">
+                <span v-for="(it,num) in yz_ma1" :style="{color:'rgb('+it.col+')'}">{{it.nr}}</span>
+            </div>
+            <button class="btn_yz" @click="huoqu1()">更换</button>
+            <button class="btn_yz" @click="tijiao()">提交</button>
+        </div>
+        <p style="display:none">{{a}}</p>
+    </div>
+</body>
+
+</html>
+
+<script>
+    new Vue({
+        el: ".box",
+        data: {
+            yz_input: '',
+            msg: ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"],
+            yz_ma1: [
+                { nr: '', col: '' },
+                { nr: '', col: '' },
+                { nr: '', col: '' },
+                { nr: '', col: '' },
+            ],
+            a: 0
+        },
+        methods: {
+            huoqu1: function () {
+                for (let j = 0; j < this.yz_ma1.length; j++) {
+                    let color_1 = Math.floor(Math.random() * 255);
+                    let color_2 = Math.floor(Math.random() * 255);
+                    let color_3 = Math.floor(Math.random() * 255);
+                    let suiji = Math.floor(Math.random() * 36);
+                    this.yz_ma1[j].nr = this.msg[suiji];
+                    this.yz_ma1[j].col = color_1 + ',' + color_2 + ',' + color_3;
+                }
+                this.a = this.a + 1;
+            },
+            tijiao: function () {
+                if (this.yz_input.length === this.yz_ma1.length) {
+                    console.log(1);
+                    var toggle_ = true;
+                    for (let i in this.yz_input) {
+                        if (this.yz_input[i] == this.yz_ma1[i].nr) {
+                            toggle_ = true;
+                        } else {
+                            toggle_ = false;
+                        }
+                    }
+                    if(toggle_){
+                        alert("恭喜你！验证码输入正确！你好聪明哦！");
+                    }else{
+                        alert("请输入正确验证码！");
+                    }
+                } else {
+                    alert("请输入4验证码！");
+                }
+            }
+        },
+        beforeMount() {
+            for (let j = 0; j < this.yz_ma1.length; j++) {
+                let color_1 = Math.floor(Math.random() * 255);
+                let color_2 = Math.floor(Math.random() * 255);
+                let color_3 = Math.floor(Math.random() * 255);
+                let suiji = Math.floor(Math.random() * 36);
+                this.yz_ma1[j].nr = this.msg[suiji];
+                this.yz_ma1[j].col = color_1 + ',' + color_2 + ',' + color_3;
+            };
+            this.a = this.a + 1;
+        }
+    });
+</script>
