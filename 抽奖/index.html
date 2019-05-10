@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="./vue.js"></script>
+    <style>
+        .p1{
+            position: relative;
+            width: 100%;
+        }
+        .p2{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            font-size: 100px;
+            transform: translate(-50%,-50%);
+        }
+        .p3{
+            position: absolute;
+            bottom: 50px;
+            left: 45%;
+        }
+        .p4{
+            position: absolute;
+            bottom: 50px;
+            right: 45%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="p1" ref="p1">
+            <p class="p2">{{name}}</p>
+            <button class="p3" @click="kaishi">开始抽奖</button>
+            <button class="p4" @click="tingzhi">停止抽奖</button>
+        </div>
+            
+    </div>
+</body>
+
+</html>
+<script>
+    new Vue({
+        el:".box",
+        data: {
+            name:'',
+            msg:["酸菜鱼","小杨生煎","东大食堂","西大食堂","西餐","谷田稻香","乌冬面"],
+            timer:''
+        },
+        methods: {
+            kaishi(){
+                var num = this.msg.length;
+                var num_ = 0;
+                var that = this;
+                var time = function(){
+                    if(num_<num-1){
+                        num_=num_+1;
+                        that.name = that.msg[num_];
+                    console.log(num_)
+                        return num_-1;
+                    }else{
+                        num_ = -1;
+                        return num_
+                    }
+                };
+                this.timer = setInterval(time, 10);
+            },
+            tingzhi(){
+                clearInterval(this.timer);
+            }
+        },
+        mounted () {
+            let h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+            console.log(this.$refs.p1.style);
+            console.log(h);
+            this.$refs.p1.style.height=h+"px";
+        }
+    })
+</script>
