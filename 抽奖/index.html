@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>午饭</title>
     <link rel="stylesheet" href="./style.css">
     <script src="./vue.js"></script>
     <style>
@@ -22,13 +22,20 @@
         }
         .p3{
             position: absolute;
-            bottom: 50px;
+            bottom: 5%;
             left: 45%;
+            transform: translateX(-100%);
         }
         .p4{
             position: absolute;
-            bottom: 50px;
+            bottom: 5%;
             right: 45%;
+            transform: translateX(100%);
+        }
+        @media screen and (max-width: 620px) {
+            .p2{
+                font-size: 30px;
+            }
         }
     </style>
 </head>
