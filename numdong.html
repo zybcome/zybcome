@@ -30,7 +30,7 @@
                 var time1 = this.shichang * 1000 / res;
                 var that = this;
                 var time = function () {
-                    that.num += 1;
+                    that.num = that.num+1;
                     console.log(that.num);
                     if (that.num >= res) {
                         that.num = res;

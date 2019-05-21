@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>map</title>
+    <style type="text/css">
+        html {
+            height: 100%
+        }
+
+        body {
+            height: 100%;
+            margin: 0px;
+            padding: 0px
+        }
+
+        #container {
+            height: 100%
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <div id="demo">点击这个按钮，获得您的坐标：</div> -->
+    <!-- <button onclick="getLocation()">获取</button> -->
+    <div id="container">
+
+    </div>
+</body>
+
+</html>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=CK7BQjYmMot4Hhw2S58Pjo4QGwZzTsjQ"></script>
+<script type="text/javascript" src="http://developer.baidu.com/map/jsdemo/demo/convertor.js"></script>
+<script>
+    var x = document.getElementById("demo");
+    // getLocation();
+    var map = new BMap.Map("container");          // 创建地图实例  
+    function getLocation() {
+        if (navigator.geolocation) {   //检测是否支持地理定位
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            alert = "对不起，您的浏览器不支持！";
+        }
+    }
+    function showPosition(position) {
+        // 获取真实的经纬度坐标
+        var a = position.coords.longitude;
+        var b = position.coords.latitude;
+        var c = position.coords.accuracy;
+        var d = position.coords.heading;
+        alert("精度"+a+";维度"+b+";位置精度"+c+";角度"+d)
+        var point = new BMap.Point(a, b);  // 创建点坐标
+        map.centerAndZoom(point, 15);
+        // 真实坐标转换为百度地图坐标
+        BMap.Convertor.translate(point, 0, function (point1) {
+            var marker1 = new BMap.Marker(point1);
+            map.addOverlay(marker1);
+            var label = new BMap.Label("您当前的位置！", { offset: new BMap.Size(20, -10) });
+            marker1.setLabel(label); //添加百度label
+            map.setCenter(point1);
+        });
+        map.addControl(new BMap.ScaleControl());
+        map.addControl(new BMap.NavigationControl());
+        map.addControl(new BMap.GeolocationControl());
+        map.addControl(new BMap.MapTypeControl());
+    }
+    window.addEventListener('load', getLocation, true);
+</script>
