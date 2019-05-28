@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+<script src="sisyphus.min.js"></script>
+<link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/bootstrap-3.3.4.css">
+<title>jQuery本地自动存储插件 Sisyphus.js</title>
+<style>
+ body{ padding:20px}
+</style>
+</head>
+
+<body>
+<h4>修改下面表单内容后会自动存储，刷新网页看效果</h4>
+<form accept-charset="UTF-8" action=""  id="basic_form" method="get" name="basic_form">
+  <div style="margin:0;padding:0;display:inline">
+    <input name="utf8" type="hidden" value="✓">
+  </div>
+  <div class="b-field">
+    <label class="input-label" for="basic_form_country"> Select Dropdown:</label>
+    <select class="span5" id="basic_form_country" name="basic_form_country">
+      <option value="Russia">Russia</option>
+      <option value="USA">USA</option>
+      <option value="England">England</option>
+    </select>
+  </div>
+  <div class="b-field">
+    <label class="input-label" for="basic_form_name">Input Text </label>
+    <input class="span5" id="basic_form_name" name="basic_form_name" type="text" value="">
+  </div>
+  <div class="b-field clearfix">
+    <label class="input-label left" for="basic_form_single">Checkbox:
+      <input class="b-check-box" id="basic_form_single" name="basic_form_single" type="checkbox" value="1">
+    </label>
+  </div>
+  <input id="" type="text">
+</form>
+<script>
+$( function() {
+	$( "#basic_form" ).sisyphus();
+	// or you can persist all forms data at one command
+	// $( "form" ).sisyphus();
+} );
+</script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+[Note] A temporary password is generated for root@localhost: hSySYU;XR1/m
+
+
+
+psw£ºzybcome 
+user£ºroot

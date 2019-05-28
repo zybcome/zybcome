@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./jquery.min.js"></script>
+    <script src="./vue.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                /*初始状态 透明度为0*/
+            }
+
+            50% {
+                opacity: 0;
+                /* 中间状态 透明度为0 */
+            }
+
+            100% {
+                opacity: 1;
+                /*结尾状态 透明度为1*/
+            }
+        }
+
+        .he {
+            /* height: 3000px; */
+            padding-bottom: 100px;
+        }
+
+        .img {
+            -webkit-animation-name: fadeIn;
+            /*动画名称*/
+            -webkit-animation-duration: 1s;
+            /*动画持续时间*/
+            -webkit-animation-iteration-count: 1;
+            /*动画次数*/
+            -webkit-animation-delay: 0s;
+            /*延迟时间*/
+            float: left;
+            margin: 1.66%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="he">
+            <img v-for="it in img" :src="it.path" alt="" :width="it.width" class="img">
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+    new Vue({
+        el: ".box",
+        data: {
+            img: [],
+            times: ''
+        },
+        mounted() {
+            var that = this;
+            window.addEventListener('scroll', this.handleScroll, true);
+            gd_h = document.documentElement.scrollTop;
+            ck_h = document.documentElement.clientHeight;
+            wd_h = document.documentElement.scrollHeight;
+            cha_ = wd_h - ck_h - gd_h;
+            times = setInterval(function () {
+                ck_h = document.documentElement.clientHeight;
+                wd_h = document.documentElement.scrollHeight;
+                if (wd_h - ck_h < "1") {
+                    $.ajax({
+                        type: "GET",
+                        url: "./msg.json",
+                        dataType: "json",
+                        success: function (data) {
+                            for (var i in data) {
+                                that.img.push(data[i])
+                            }
+                        }
+                    })
+                } else {
+                    console.log(1)
+                    clearInterval(times)
+                }
+            }, 1);
+        },
+        methods: {
+            handleScroll() {
+                var that = this;
+                gd_h = document.documentElement.scrollTop;
+                ck_h = document.documentElement.clientHeight;
+                wd_h = document.documentElement.scrollHeight;
+                cha_ = wd_h - ck_h - gd_h;
+                if (cha_ <= "1") {
+                    $.ajax({
+                        type: "GET",
+                        url: "./msg.json",
+                        dataType: "json",
+                        success: function (data) {
+                            for (var i in data) {
+                                that.img.push(data[i])
+                            }
+                        },
+                        error: function (err) {
+                            console.log(err)
+                        }
+                    })
+                }
+            }
+        }
+    })
+</script>

@@ -1,0 +1,319 @@
+Microsoft Windows [版本 10.0.14393]
+(c) 2016 Microsoft Corporation。保留所有权利。
+
+C:\Users\ADMIN>D:
+
+D:\>mysql\cd mysql-5.7.26-winx64\bin
+'mysql\cd' 不是内部或外部命令，也不是可运行的程序
+或批处理文件。
+
+D:\>cd mysql\mysql-5.7.26-winx64\bin
+
+D:\mysql\mysql-5.7.26-winx64\bin>mysql
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 2
+Server version: 5.7.26 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2019, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases
+    -> ^C
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| runoob             |
+| sys                |
+| zybcome            |
++--------------------+
+6 rows in set (0.00 sec)
+
+mysql> use mysql;
+Database changed
+mysql> show tables;
++---------------------------+
+| Tables_in_mysql           |
++---------------------------+
+| columns_priv              |
+| db                        |
+| engine_cost               |
+| event                     |
+| func                      |
+| general_log               |
+| gtid_executed             |
+| help_category             |
+| help_keyword              |
+| help_relation             |
+| help_topic                |
+| innodb_index_stats        |
+| innodb_table_stats        |
+| ndb_binlog_index          |
+| plugin                    |
+| proc                      |
+| procs_priv                |
+| proxies_priv              |
+| server_cost               |
+| servers                   |
+| slave_master_info         |
+| slave_relay_log_info      |
+| slave_worker_info         |
+| slow_log                  |
+| tables_priv               |
+| time_zone                 |
+| time_zone_leap_second     |
+| time_zone_name            |
+| time_zone_transition      |
+| time_zone_transition_type |
+| user                      |
++---------------------------+
+31 rows in set (0.00 sec)
+
+mysql> select user,host,password from user;
+ERROR 1054 (42S22): Unknown column 'password' in 'field list'
+mysql> select uesr,host,password from user;
+ERROR 1054 (42S22): Unknown column 'uesr' in 'field list'
+mysql> select uesrname,host,password from user;
+ERROR 1054 (42S22): Unknown column 'uesrname' in 'field list'
+mysql> select password from user;
+ERROR 1054 (42S22): Unknown column 'password' in 'field list'
+mysql> update user set password=password('zybcome') where user='root' and host='localhost';
+ERROR 1054 (42S22): Unknown column 'password' in 'field list'
+mysql> update mysql.user set authentication_string=password('zybcome') where user='root';
+Query OK, 1 row affected, 1 warning (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 1
+
+mysql> select uesrname,host,authentication_string from user;
+ERROR 1054 (42S22): Unknown column 'uesrname' in 'field list'
+mysql> select uesr,host,authentication_string from user;
+ERROR 1054 (42S22): Unknown column 'uesr' in 'field list'
+mysql> select user,host,authentication_string from user;
++---------------+-----------+-------------------------------------------+
+| user          | host      | authentication_string                     |
++---------------+-----------+-------------------------------------------+
+| root          | localhost | *9276A155B6D3A3B714E1312045A4E96BE7993F4A |
+| mysql.session | localhost | *THISISNOTAVALIDPASSWORDTHATCANBEUSEDHERE |
+| mysql.sys     | localhost | *THISISNOTAVALIDPASSWORDTHATCANBEUSEDHERE |
++---------------+-----------+-------------------------------------------+
+3 rows in set (0.00 sec)
+
+mysql> drop database zybcome
+    -> ^C
+mysql> drop database zybcome;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> create database zybcome
+    -> ^C
+mysql> create database zybcome;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> use zybcome
+Database changed
+mysql> create table runoob_tbl(
+    -> runoob_id INT NOT NULL AUTO_INCREMENT,
+    -> runoob_title VARCHAR(100) NOT NULL,
+    -> runoob_author VARCHAR(40) NOT NULL,
+    -> submission_date DATE,
+    -> PRIMARY KEY ( runoob_id )
+    -> )ENGINE=InnoDB DEFAULT CHARSET=utf8;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> DROP TABLE runoob_tbl
+    -> ^C
+mysql> DROP TABLE runoob_tbl;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> INSERT INTO runoob_tbl
+    -> (runoob_title, runoob_author, submission_date)
+    -> VALUES
+    -> ("学习 PHP", "菜鸟教程", NOW());
+ERROR 1146 (42S02): Table 'zybcome.runoob_tbl' doesn't exist
+mysql> CREATE TABLE IF NOT EXISTS `runoob_tbl`(
+    -> runoob_id INT NOT NULL AUTO_INCREMENT,runoob_title VARCHAR(100) NOT NULL,^Z^Z^C
+mysql> CREATE TABLE runoob_tbl(
+    -> runoob_id INT NOT NULL AUTO_INCREMENT,
+    -> runoob_title VARCHAR(100) NOT NULL,
+    -> runoob_author VARCHAR(40) NOT NULL,
+    -> submission_date DATE,
+    -> PRIMARY KEY ( runoob_id )
+    -> )ENGINE=InnoDB DEFAULT CHARSET=utf8;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> INSERT INTO runoob_tbl
+    -> (runoob_title, runoob_author, submission_date)
+    -> VALUES
+    -> ("学习 PHP", "菜鸟教程", NOW());
+Query OK, 1 row affected, 1 warning (0.00 sec)
+
+mysql> INSERT INTO runoob_tbl
+    -> (runoob_title, runoob_author, submission_date)
+    -> VALUES
+    -> ("学习 MySQL", "菜鸟教程", NOW());
+Query OK, 1 row affected, 1 warning (0.00 sec)
+
+mysql> INSERT INTO runoob_tbl
+    -> (runoob_title, runoob_author, submission_date)
+    -> VALUES
+    -> ("JAVA 教程", "RUNOOB.COM", '2016-05-06');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from runoob_tbl;
++-----------+--------------+---------------+-----------------+
+| runoob_id | runoob_title | runoob_author | submission_date |
++-----------+--------------+---------------+-----------------+
+|         1 | 学习 PHP     | 菜鸟教程      | 2019-05-28      |
+|         2 | 学习 MySQL   | 菜鸟教程      | 2019-05-28      |
+|         3 | JAVA 教程    | RUNOOB.COM    | 2016-05-06      |
++-----------+--------------+---------------+-----------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from runoob_tbl;
++-----------+--------------+---------------+-----------------+
+| runoob_id | runoob_title | runoob_author | submission_date |
++-----------+--------------+---------------+-----------------+
+|         1 | 学习 PHP     | 菜鸟教程      | 2019-05-28      |
+|         2 | 学习 MySQL   | 菜鸟教程      | 2019-05-28      |
+|         3 | JAVA 教程    | RUNOOB.COM    | 2016-05-06      |
++-----------+--------------+---------------+-----------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from runoob_tbl where runoob_title='学习 PHP';
++-----------+--------------+---------------+-----------------+
+| runoob_id | runoob_title | runoob_author | submission_date |
++-----------+--------------+---------------+-----------------+
+|         1 | 学习 PHP     | 菜鸟教程      | 2019-05-28      |
++-----------+--------------+---------------+-----------------+
+1 row in set (0.00 sec)
+
+mysql> select * from runoob_tbl where binary runoob_author='runoob.com';
+Empty set (0.00 sec)
+
+mysql> select * from runoob_tbl where binary runoob_author='RUNOOB.COM';
++-----------+--------------+---------------+-----------------+
+| runoob_id | runoob_title | runoob_author | submission_date |
++-----------+--------------+---------------+-----------------+
+|         3 | JAVA 教程    | RUNOOB.COM    | 2016-05-06      |
++-----------+--------------+---------------+-----------------+
+1 row in set (0.00 sec)
+
+mysql> update runoob_tbl set runoob_title='学习 C++' where runoob_id=3;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from runoob_tbl where funoob_id=3;
+ERROR 1054 (42S22): Unknown column 'funoob_id' in 'where clause'
+mysql> select * from runoob_tbl where runoob_id=3;
++-----------+--------------+---------------+-----------------+
+| runoob_id | runoob_title | runoob_author | submission_date |
++-----------+--------------+---------------+-----------------+
+|         3 | 学习 C++     | RUNOOB.COM    | 2016-05-06      |
++-----------+--------------+---------------+-----------------+
+1 row in set (0.00 sec)
+
+mysql> delete from runoob_tbl where runoob_id=3;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from runoob_tbl where runoob_id=3;
+Empty set (0.00 sec)
+
+mysql> select * from runoob_tbl;
++-----------+--------------+---------------+-----------------+
+| runoob_id | runoob_title | runoob_author | submission_date |
++-----------+--------------+---------------+-----------------+
+|         1 | 学习 PHP     | 菜鸟教程      | 2019-05-28      |
+|         2 | 学习 MySQL   | 菜鸟教程      | 2019-05-28      |
++-----------+--------------+---------------+-----------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from runoob_tbl where runoob_author like '%com';
+Empty set (0.00 sec)
+
+mysql> select * from runoob_tbl where runoob_author like '%学习';
+Empty set (0.00 sec)
+
+mysql> select * from runoob_tbl where runoob_title like '%学习';
+Empty set (0.00 sec)
+
+mysql> select * from runoob_tbl where runoob_author LIKE '%菜鸟';
+Empty set (0.00 sec)
+
+mysql> SELECT * from runoob_tbl WHERE runoob_author LIKE '%菜鸟';
+Empty set (0.00 sec)
+
+mysql> SELECT * from runoob_tbl WHERE runoob_author LIKE '%教程';
++-----------+--------------+---------------+-----------------+
+| runoob_id | runoob_title | runoob_author | submission_date |
++-----------+--------------+---------------+-----------------+
+|         1 | 学习 PHP     | 菜鸟教程      | 2019-05-28      |
+|         2 | 学习 MySQL   | 菜鸟教程      | 2019-05-28      |
++-----------+--------------+---------------+-----------------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM runoob_tbl
+    -> INTO OUTFILE '/tmp/runoob.txt';
+ERROR 1290 (HY000): The MySQL server is running with the --secure-file-priv option so it cannot execute this statement
+mysql> show variables like '%secure%';
++--------------------------+-------+
+| Variable_name            | Value |
++--------------------------+-------+
+| require_secure_transport | OFF   |
+| secure_auth              | ON    |
+| secure_file_priv         | NULL  |
++--------------------------+-------+
+3 rows in set, 1 warning (0.00 sec)
+
+mysql> INTO OUTFILE '/tmp/runoob.txt';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'INTO OUTFILE '/tmp/runoob.txt'' at line 1
+mysql> INTO OUTFILE '/tmp/runoob.txt';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'INTO OUTFILE '/tmp/runoob.txt'' at line 1
+mysql> INTO OUTFILE 'D:/mysql/mysql-5.7.26-winx64/tmp';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'INTO OUTFILE 'D:/mysql/mysql-5.7.26-winx64/tmp'' at line 1
+mysql> show variables like '%secure%';
++--------------------------+-------+
+| Variable_name            | Value |
++--------------------------+-------+
+| require_secure_transport | OFF   |
+| secure_auth              | ON    |
+| secure_file_priv         | NULL  |
++--------------------------+-------+
+3 rows in set, 1 warning (0.00 sec)
+
+mysql> show variables like '%secure%';
++--------------------------+-------+
+| Variable_name            | Value |
++--------------------------+-------+
+| require_secure_transport | OFF   |
+| secure_auth              | ON    |
+| secure_file_priv         | NULL  |
++--------------------------+-------+
+3 rows in set, 1 warning (0.00 sec)
+
+mysql> show variables like '%secure%';
++--------------------------+-------+
+| Variable_name            | Value |
++--------------------------+-------+
+| require_secure_transport | OFF   |
+| secure_auth              | ON    |
+| secure_file_priv         | NULL  |
++--------------------------+-------+
+3 rows in set, 1 warning (0.00 sec)
+
+mysql> show variables like '%secure%';
++--------------------------+-------+
+| Variable_name            | Value |
++--------------------------+-------+
+| require_secure_transport | OFF   |
+| secure_auth              | ON    |
+| secure_file_priv         | NULL  |
++--------------------------+-------+
+3 rows in set, 1 warning (0.00 sec)
+
+mysql>
