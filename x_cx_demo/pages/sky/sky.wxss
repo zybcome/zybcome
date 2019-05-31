@@ -1,0 +1,29 @@
+.sky_t{
+  text-align: center;
+  margin-top: 20rpx;
+  font-weight: bold;
+  font-size: 36rpx;
+}
+.sky_ts{
+    text-align: center;
+  margin-top: 20rpx;
+  color: red;
+  font-size: 24rpx;
+}
+.sky_wd{
+  text-align: center;
+  font-size: 30rpx;
+  color: rgb(255, 174, 0);
+}
+.sky_li{
+  width: 80%;
+  border: 1px solid #ccc;
+  margin: 10px auto;
+  padding: 15px;
+}
+.sky_li view{
+  text-align: center;
+  height: 30rpx;
+  font-size: 26rpx;
+  line-height: 30rpx;
+}

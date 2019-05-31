@@ -11,5 +11,7 @@
     <text class="user-motto">{{motto}}</text>
     <text>{{msg}}</text>
   </view>
-  <button bindtap="clickMe">点击我</button>
+  <button bindtap="clickMe">我的位置</button>
+  <input bindinput="bindReason" placeholder='输入所在城市' class='sky_city'></input>
+  <button bindtap="sky">查询天气</button>
 </view>

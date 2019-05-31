@@ -1,27 +1,50 @@
 //index.js
 //获取应用实例
 const app = getApp()
-
 Page({
   data: {
     motto: 'Hello World',
     msg: '',
-    
+    reason: '',
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
   },
-  onReady: function (e) {
-    
+  bindReason(e) {
+    this.setData({
+      reason: e.detail.value
+    })
+  },
+  onReady: function(e) {
   },
   //事件处理函数
   bindViewTap: function() {
     wx.navigateTo({
       url: '../logs/logs'
     })
-  }, 
+  },
+  sky: function() {
+    if (this.data.reason == '') {
+      wx.showModal({
+        title: '提示',
+        content: '请输入城市',
+        success: function(res) {
+          if (res.confirm) { //这里是点击了确定以后
+            // console.log('用户点击确定')
+          } else { //这里是点击了取消以后
+            // console.log('用户点击取消')
+          }
+        }
+      })
+    } else {
+      var that = this;
+      var city = that.data.reason;
+      wx.navigateTo({
+        url: '../sky/sky?city=' + city,
+      })
+    }
+  },
   clickMe: function() {
-    
     this.setData({
       msg: "Hello World111",
       motto: "",
@@ -29,7 +52,6 @@ Page({
     wx.navigateTo({
       url: '../map/map',
     })
-    
   },
   onLoad: function() {
     if (app.globalData.userInfo) {
@@ -67,5 +89,4 @@ Page({
       hasUserInfo: true
     })
   },
-  
 })

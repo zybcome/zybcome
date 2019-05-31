@@ -1,0 +1,13 @@
+<view class="sky_t">{{msg.city}}</view>
+<view class='sky_ts'>{{msg.ganmao}}</view>
+<view class='sky_wd'>当前温度：{{msg.wendu}}</view>
+<view class='sky_ul'>
+  <view wx:for="{{msg.forecast}}" wx:key="index" wx:for-item="itemName" class='sky_li'>
+    <view>{{itemName.date}}</view>
+    <view>{{itemName.fengli}}</view>
+    <view>{{itemName.fengxiang}}</view>
+    <view>{{itemName.high}}</view>
+    <view>{{itemName.low}}</view>
+    <view>{{itemName.type}}</view>
+  </view>
+</view>
