@@ -1,0 +1,2 @@
+<!-- 获取当前定位 -->
+<map id='myMap' latitude="{{latitude}}" longitude="{{longitude}}" show-location></map>
