@@ -1,0 +1,85 @@
+<script>
+                var name_f = false;
+                var age_f = false;
+                var email_f = false;
+                var sex_f = false;
+                // 验证姓名
+                $(".name_ws").on("blur", function () {
+                    var name_v = $(this).val();
+                    if (!(/^((?![\u3000-\u303F])[\u2E80-\uFE4F]|\·)*(?![\u3000-\u303F])[\u2E80-\uFE4F](\·)*$/.test(name_v))) {
+                        $(this).css("border", "1.5px solid red");
+                        layer.msg('输入姓名格式不正确！', { icon: 2 });
+                        return name_f = false;
+                    } else {
+                        $(this).css("border", "1.5px solid #00c900");
+                        return name_f = true;
+                    }
+                });
+                // 验证年龄
+                $(".age_ws").on("blur", function () {
+                    var sge_v = $(this).val();
+                    if (!(/^1[89]|[2-5]\d|60$/.test(sge_v))) {
+                        $(this).css("border", "1.5px solid red");
+                        layer.msg('年龄应在18-60岁之间！', { icon: 2 });
+                        return age_f = false;
+                    } else {
+                        $(this).css("border", "1.5px solid #00c900");
+                        return age_f = true;
+                    }
+                });
+                // 验证邮箱
+                $(".email_ws").on("blur", function () {
+                    var email_v = $(this).val();
+                    if (!(/^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/.test(email_v))) {
+                        $(this).css("border", "1.5px solid red");
+                        layer.msg('输入邮箱地址不正确！', { icon: 2 });
+                        return email_f = false;
+                    } else {
+                        $(this).css("border", "1.5px solid #00c900");
+                        return email_f = true;
+                    }
+                });
+                // 验证性别
+                $(".sex_ws").on("blur", function () {
+                    var sex_v = $(this).val();
+                    if (sex_v != "男" && sex_v != "女") {
+                        $(this).css("border", "1.5px solid red");
+                        layer.msg('输入性别只可以是男或女！', { icon: 2 });
+                        return sex_f = false;
+                    } else {
+                        $(this).css("border", "1.5px solid #00c900");
+                        return sex_f = true;
+                    }
+                });
+                // 点击完善按钮
+                $(".gr_ckcen_pb").on("click", function () {
+                    // console.log(name_f,age_f,email_f,sex_f)
+                    if (name_f && age_f && email_f && sex_f) {
+                        layer.confirm('您已完善个人信息，立即前往领取优惠券！', {
+                            btn: ['立即领取', '稍后领取'] //按钮
+                        }, function () {
+                            layer.msg('正在前往领券中心', { icon: 6 });
+                            setTimeout(function () {
+                                window.location = "https://www.qishanzhuce.com/index/lq_yhq";
+                            },2000)
+                        }, function () {
+                            layer.msg('稍后您可以在领券中心领取！', {
+                                time: 20000, //20s后自动关闭
+                                btn: ['明白了', '知道了']
+                            });
+                        });
+                    } else {
+                        layer.confirm('请完善您的个人信息！', {
+                            btn: ['立即完善', '稍后完善'] //按钮
+                        }, function () {
+                            layer.msg('请继续完善您的信息！', { icon: 8 });
+                        }, function () {
+                            layer.msg('完善信息可以领取优惠券哦！', {
+                                time: 20000, //20s后自动关闭
+                                btn: ['明白了', '知道了']
+                            });
+                        });
+                    }
+
+                })
+</script>
