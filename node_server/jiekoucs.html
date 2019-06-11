@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./jquery-3.4.1.min.js"></script>
+</head>
+
+<body>
+    <button class="btn">
+        请求............
+    </button>
+    <input type="text" value="" name='user_name' class="user_name">
+    <input type="password" value="" name="user_psw" class="user_psw">
+    <button class="sbm">提交</button>
+</body>
+
+</html>
+<script>
+    $(".btn").on("click", function () {
+        $.ajax({
+            type: "GET",
+            url: "http://127.0.0.1:5566/aaa/gethero?runoob_id=1",
+            dataType: "jsonp",
+            success: function (data) {
+                console.log(data);
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+    })
+    $(".sbm").on("click", function () {
+        $.ajax({
+            type: "POST",
+            url: "http://127.0.0.1:5566/user/msg",
+            dataType: "jsonp",
+            data:{
+                user_name:$(".user_name").val(),
+                user_psw:$(".user_psw").val()
+            },
+            success: function (data) {
+                console.log(data);
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+    })
+</script>
