@@ -3,10 +3,28 @@ const url = require("url");
 const fs = require("fs");
 const express = require('express')
 const app = express()
-
-
 //解析pots请求
 const bodyParser = require('body-parser');
+// 创建 application/x-www-form-urlencoded 编码解析
+const urlencodedParser = bodyParser.urlencoded({ extended: true })
+// 解析ajax请求post 编码解析
+app.use(bodyParser.json());
+// 解决跨域问题
+app.all('*', function (req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');
+    res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
+    if (req.method == 'OPTIONS') {
+        res.send(200);
+    } else {
+        next();
+    }
+});
+
+
+
+
+
 
 
 // const path = require("path");
@@ -66,9 +84,36 @@ connection.connect();
 // });
 
 
-
-
-
+// 删除用户
+app.post('/del/user', (req, res) => {
+    var response = {
+        user_name: req.body.user_name,
+        user_psw: req.body.user_psw
+    };
+    const sql = "SELECT * FROM user_msg where user_name='" + response.user_name + "'";
+    connection.query(sql, (err, result) => {
+        // console.log(result);
+        if (err) {
+            console.log('[SELECT ERROR] - ', err.message);
+            res.json(false);
+            return;
+        } else {
+            if (result.length !== 0 && response.user_name === result[0].user_name && response.user_psw === result[0].user_psw) {
+                const delSql = "DELETE FROM user_msg where user_name='" + response.user_name + "'";
+                connection.query(delSql, (err, result) => {
+                    if (err) {
+                        console.log('[DELETE ERROR] - ', err.message);
+                        return;
+                    } else {
+                        res.json(response.user_name);
+                    }
+                });
+            } else {
+                res.json(false);
+            }
+        }
+    });
+})
 
 
 
@@ -87,77 +132,129 @@ connection.connect();
 
 
 
+// form表单提交代码
+
+
+// app.post('/form/user/msg', urlencodedParser, (req, res) => {
+//     response = {
+//         user_name: req.body.user_name,
+//         user_psw: req.body.user_psw
+//     };
+//     const sql = "SELECT * FROM user_msg where user_name='" + response.user_name + "'";
+//     //查
+//     connection.query(sql, function (err, result) {
+//         if (err) {
+//             console.log('[SELECT ERROR] - ', err.message);
+//             return;
+//         } else {
+//             if (result.length === 0) {
+//                 const addSql = "INSERT INTO user_msg(user_name, user_psw) VALUES('" + response.user_name + "','" + response.user_psw + "')";
+//                 connection.query(addSql, function (err, result) {
+//                     if (err) {
+//                         console.log('[INSERT ERROR] - ', err.message);
+//                         return;
+//                     }
+//                     console.log('--------------------------INSERT----------------------------');
+//                     //console.log('INSERT ID:',result.insertId);
+//                     console.log(result);
+//                     res.jsonp(result);
+//                 });
+//             } else {
+//                 res.jsonp(result.user_name);
+//                 console.log(result.user_name);
+//             }
+//         }
+//     });
+// });
 
 
 
-// 创建 application/x-www-form-urlencoded 编码解析
-var urlencodedParser = bodyParser.urlencoded({ extended: true })
-// 添加用户
-app.post('/user/msg', urlencodedParser, function (req, res) {
+
+
+// ajax请求post代码
+
+// 注册用户
+
+app.post('/user/msg', function (req, res) {
     // 接收前端form表单传入的值
     response = {
         user_name: req.body.user_name,
         user_psw: req.body.user_psw
     };
     const sql = "SELECT * FROM user_msg where user_name='" + response.user_name + "'";
-    //查
+    //查询
     connection.query(sql, function (err, result) {
+        console.log(response.user_name);
         if (err) {
             console.log('[SELECT ERROR] - ', err.message);
             return;
         } else {
-            if (result.length === 0) {
-                var addSql = "INSERT INTO user_msg(user_name, user_psw) VALUES('" + response.user_name + "','" + response.user_psw + "')";
+            if (result.length === 0 && response.user_name !== '' && response.user_psw !== '') {
+                // 添加用户
+                const addSql = "INSERT INTO user_msg(user_name, user_psw) VALUES('" + response.user_name + "','" + response.user_psw + "')";
                 connection.query(addSql, function (err, result) {
                     if (err) {
                         console.log('[INSERT ERROR] - ', err.message);
                         return;
                     }
-                    console.log('--------------------------INSERT----------------------------');
-                    //console.log('INSERT ID:',result.insertId);
                     console.log(result);
-                    res.jsonp(result);
+                    res.json(true);
                 });
             } else {
-                res.jsonp(result.user_name);
-                console.log(result.user_name);
+                res.json(false);
             }
         }
     });
-
-    // 添加用户信息
-    // var addSql = "INSERT INTO user_msg(user_name, user_psw) VALUES('" + response.user_name + "','" + response.user_psw + "')";
-    // connection.query(addSql, function (err, result) {
-    //     if (err) {
-    //         console.log('[INSERT ERROR] - ', err.message);
-    //         return;
-    //     }
-    //     console.log('--------------------------INSERT----------------------------');
-    //     //console.log('INSERT ID:',result.insertId);
-    //     console.log(result);
-    //     res.jsonp(result);
-    //     console.log('-----------------------------------------------------------------\n\n');
-    // });
 });
 
 
+
+
+//用户登录
+app.post('/user/login', (req, res) => {
+    console.log(req);
+    const response = {
+        user_name: req.body.user_name,
+        user_psw: req.body.user_psw
+    };
+    const sql = "SELECT * FROM user_msg where user_name='" + response.user_name + "'";
+    //查询
+    connection.query(sql, (err, result) => {
+        // console.log(result);
+        if (err) {
+            console.log('[SELECT ERROR] - ', err.message);
+            res.json(false);
+            return;
+        } else {
+            if (result.length !== 0 && response.user_name === result[0].user_name && response.user_psw === result[0].user_psw) {
+                res.json(result[0].user_name);
+            } else {
+                res.json(false);
+            }
+        }
+    });
+});
 
 
 
 
 
 // 根据ID 获取相关数据
-app.get('/aaa/gethero', (req, res) => {
-    const id = req.query.runoob_id;
-    const sql = 'SELECT * FROM runoob_tbl where runoob_id=' + id;
+app.get('/leav/msg', (req, res) => {
+    const user_name = req.query.user_name;
+    const sql = "SELECT * FROM leav_msg where user_name='" + user_name+"'";
     //查
-    connection.query(sql, function (err, result) {
+    connection.query(sql, (err, result) => {
         if (err) {
             console.log('[SELECT ERROR] - ', err.message);
             return;
         }
-        res.jsonp(result);
-        console.log(result);
+        // console.log(result);
+        res.json(result);
+        // console.log(result);
     });
 });
+
+
+
 // connection.end();

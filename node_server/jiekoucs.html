@@ -13,41 +13,136 @@
     <button class="btn">
         请求............
     </button>
+    <br>
+    <br>
+    <br>
+    <p class="gxdl">请先登录！</p>
+    <br>
+    <br>
+    <br>
     <input type="text" value="" name='user_name' class="user_name">
     <input type="password" value="" name="user_psw" class="user_psw">
-    <button class="sbm">提交</button>
+    <button class="sbm">注册</button>
+
+
+    <br>
+    <br>
+    <br>
+    <input type="text" value="" name='login_name' class="login_name">
+    <input type="password" value="" name="login_psw" class="login_psw">
+    <button class="denglu">登录</button>
+    <br>
+    <br>
+    <br>
+    <input type="text" value="" name='del_name' class="del_name">
+    <input type="password" value="" name="del_psw" class="del_psw">
+    <button class="delUser">删除用户</button>
 </body>
 
 </html>
 <script>
+    //登录状态
+    var vuex_dl = '请先登录！';
+    var vuex_dlkg = false;
+    var user_name = ''
     $(".btn").on("click", function () {
-        $.ajax({
-            type: "GET",
-            url: "http://127.0.0.1:5566/aaa/gethero?runoob_id=1",
-            dataType: "jsonp",
-            success: function (data) {
-                console.log(data);
-            },
-            error: function (err) {
-                console.log(err);
-            }
-        });
-    })
+        if (vuex_dlkg) {
+            console.log(user_name);
+            $.ajax({
+                type: "GET",
+                url: "http://127.0.0.1:5566/leav/msg?user_name=" + user_name,
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+        } else {
+            $.ajax({
+                type: "GET",
+                url: "http://127.0.0.1:5566/leav/msg?user_name=",
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+        }
+    });
     $(".sbm").on("click", function () {
         $.ajax({
             type: "POST",
             url: "http://127.0.0.1:5566/user/msg",
-            dataType: "jsonp",
-            data:{
-                user_name:$(".user_name").val(),
-                user_psw:$(".user_psw").val()
-            },
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            data: JSON.stringify({
+                user_name: $(".user_name").val(),
+                user_psw: $(".user_psw").val()
+            }),
             success: function (data) {
-                console.log(data);
+                if (data === true) {
+                    alert("恭喜您" + $(".user_name").val() + "注册成功！");
+                } else {
+                    alert("注册失败！");
+                };
             },
             error: function (err) {
                 console.log(err);
             }
         });
-    })
+    });
+    $(".denglu").on("click", function () {
+        $.ajax({
+            type: "POST",
+            url: "http://127.0.0.1:5566/user/login",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            data: JSON.stringify({
+                user_name: $(".login_name").val(),
+                user_psw: $(".login_psw").val()
+            }),
+            success: function (data) {
+                if (data === $(".login_name").val()) {
+                    alert("登陆成功！");
+                    $(".gxdl").text("恭喜" + data + "登录成功！");
+                    vuex_dlkg = true;
+                    user_name = $(".login_name").val();
+                } else {
+                    alert("用户名或密码错误！");
+                    vuex_dlkg = false;
+                    $(".gxdl").text("登陆失败，用户名或密码错误！");
+                }
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+    });
+    $(".delUser").on("click", function () {
+        $.ajax({
+            type: "POST",
+            url: "http://127.0.0.1:5566/del/user",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            data: JSON.stringify({
+                user_name: $(".del_name").val(),
+                user_psw: $(".del_psw").val()
+            }),
+            success: function (data) {
+                if (data === false) {
+                    alert('删除失败！用户不存在或密码错误！');
+                } else {
+                    alert('恭喜您成功删除用户' + data);
+                    $(".gxdl").text("请先登录！");
+                }
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+    });
 </script>
