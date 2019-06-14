@@ -1,14 +1,22 @@
 const http = require("http");
 const url = require("url");
 const fs = require("fs");
-const express = require('express')
-const app = express()
+const express = require('express');
+const app = express();
+
+
 //解析pots请求
 const bodyParser = require('body-parser');
+
+
 // 创建 application/x-www-form-urlencoded 编码解析
-const urlencodedParser = bodyParser.urlencoded({ extended: true })
+const urlencodedParser = bodyParser.urlencoded({ extended: true });
+
+
 // 解析ajax请求post 编码解析
 app.use(bodyParser.json());
+
+
 // 解决跨域问题
 app.all('*', function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
@@ -18,7 +26,7 @@ app.all('*', function (req, res, next) {
         res.send(200);
     } else {
         next();
-    }
+    };
 });
 
 
@@ -55,7 +63,7 @@ app.all('*', function (req, res, next) {
 app.listen(5566, () => {
     // 打印一下
     console.log('http://127.0.0.1:5566/api/gethero?runoob_id=1');
-})
+});
 // 连接数据库
 var mysql = require('mysql');
 var connection = mysql.createConnection({
@@ -90,6 +98,7 @@ app.post('/del/user', (req, res) => {
         user_name: req.body.user_name,
         user_psw: req.body.user_psw
     };
+    // 根据用户名字查询数据库是否存在
     const sql = "SELECT * FROM user_msg where user_name='" + response.user_name + "'";
     connection.query(sql, (err, result) => {
         // console.log(result);
@@ -98,6 +107,7 @@ app.post('/del/user', (req, res) => {
             res.json(false);
             return;
         } else {
+            // 如果用户存在则删除用户
             if (result.length !== 0 && response.user_name === result[0].user_name && response.user_psw === result[0].user_psw) {
                 const delSql = "DELETE FROM user_msg where user_name='" + response.user_name + "'";
                 connection.query(delSql, (err, result) => {
@@ -109,11 +119,46 @@ app.post('/del/user', (req, res) => {
                     }
                 });
             } else {
+                // 如果用户不存在返回false
                 res.json(false);
-            }
-        }
+            };
+        };
     });
-})
+});
+
+
+// 修改密码
+app.post('/set/psw', (req, res) => {
+    var response = {
+        user_name: req.body.user_name,
+        user_psw: req.body.user_psw,
+        ipt_new: req.body.ipt_new
+    };
+    // 查询用户信息是否存在
+    const sql = "SELECT * FROM user_msg where user_name='" + response.user_name + "'";
+    connection.query(sql, (err, result) => {
+        if (err) {
+            console.log('[SELECT ERROR] - ', err.message);
+            res.json(false);
+            return;
+        } else {
+            if (result.length !== 0 && response.user_name === result[0].user_name && response.user_psw === result[0].user_psw) {
+                const upDate = "UPDATE user_msg SET user_psw='" + response.ipt_new + "' WHERE user_name='" + response.user_name + "'";
+                connection.query(upDate, (err, result) => {
+                    if (err) {
+                        console.log('[SELECT ERROR] - ', err.message);
+                        res.json("set-err");
+                        return;
+                    } else {
+                        res.json(true);
+                    };
+                });
+            } else {
+                res.json("err");
+            };
+        };
+    });
+});
 
 
 
@@ -212,7 +257,7 @@ app.post('/user/msg', function (req, res) {
 
 //用户登录
 app.post('/user/login', (req, res) => {
-    console.log(req);
+    // console.log(req);
     const response = {
         user_name: req.body.user_name,
         user_psw: req.body.user_psw
@@ -240,20 +285,59 @@ app.post('/user/login', (req, res) => {
 
 
 // 根据ID 获取相关数据
+
+//添加留言,查看留言
 app.get('/leav/msg', (req, res) => {
     const user_name = req.query.user_name;
-    const sql = "SELECT * FROM leav_msg where user_name='" + user_name+"'";
-    //查
-    connection.query(sql, (err, result) => {
+    const user_leav = req.query.user_leav;
+    // console.log(user_leav);
+    if (user_leav == undefined) {
+        const sql = "SELECT * FROM leav_msg where user_name='" + user_name + "'";
+        //查
+        connection.query(sql, (err, result) => {
+            if (err) {
+                console.log('[SELECT ERROR] - ', err.message);
+                return;
+            }
+            res.json(result);
+        });
+    } else {
+        const addSql = "INSERT INTO leav_msg(user_name, user_leav) VALUES('" + user_name + "','" + user_leav + "')";
+        connection.query(addSql, function (err, result) {
+            if (err) {
+                console.log('[INSERT ERROR] - ', err.message);
+                return;
+            } else {
+                const sql = "SELECT * FROM leav_msg where user_name='" + user_name + "'";
+                //查
+                connection.query(sql, (err, result) => {
+                    if (err) {
+                        console.log('[SELECT ERROR] - ', err.message);
+                        return;
+                    }
+                    res.json(result);
+                });
+            };
+        });
+    }
+
+});
+
+
+//删除留言
+app.get('/del/leav', (req, res) => {
+    const leav_id = req.query.leav_id;
+    const delSql = "DELETE FROM leav_msg where leav_id='" + leav_id + "'";
+    connection.query(delSql, (err, result) => {
         if (err) {
-            console.log('[SELECT ERROR] - ', err.message);
+            console.log('[DELETE ERROR] - ', err.message);
             return;
-        }
-        // console.log(result);
-        res.json(result);
-        // console.log(result);
+        } else {
+            res.json(result);
+        };
     });
 });
+
 
 
 
