@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./jquery-3.4.1.min.js"></script>
+</head>
+
+<body>
+    <br>
+    <br>
+    <br>
+    <p class="gxdl">请先登录！</p>
+    <br>
+    <br>
+    <br>
+    <input type="text" value="" name='user_name' class="user_name">
+    <input type="password" value="" name="user_psw" class="user_psw">
+    <button class="sbm">注册</button>
+
+
+    <br>
+    <br>
+    <br>
+    <input type="text" value="" name='login_name' class="login_name">
+    <input type="password" value="" name="login_psw" class="login_psw">
+    <button class="denglu">登录</button>
+    <br>
+    <br>
+    <br>
+    <input type="text" value="" name='del_name' class="del_name">
+    <input type="password" value="" name="del_psw" class="del_psw">
+    <button class="delUser">删除用户</button>
+    <br>
+    <br>
+    <br>
+    <input type="text" class="add_leav_ipt">
+    <button class="add_leav">添加留言</button>
+    <button class="look_leav">查看留言</button>
+    <div class="liuy"></div>
+    <br>
+    <br>
+    <br>
+    <p>修改密码</p>
+    <input type="text" placeholder="输入账号" class="ipt_user">
+    <input type="password" placeholder="输入旧密码" class="ipt_old">
+    <input type="password" placeholder="输入新密码" class="ipt_new">
+    <input type="password" placeholder="确认新密码" class="ipt_ynew">
+    <button class="ipt_yes">提交</button>
+</body>
+
+</html>
+<script>
+    //登录状态
+    let vuex_dl = '请先登录！';
+    let vuex_dlkg = false;
+    let user_name = '';
+    let liuyan_msg = '';
+    const ip ="47.100.214.150:3355";
+
+
+    // 修改密码
+    {
+        $(".ipt_yes").on("click", function () {
+            if ($(".ipt_new").val() === $(".ipt_ynew").val() && $(".ipt_new").val() !== '' && $(".ipt_ynew").val() !== '') {
+                $.ajax({
+                    type: "POST",
+                    url: "http://127.0.0.1:5566/set/psw",
+                    contentType: "application/json;charset=utf-8",
+                    dataType: "json",
+                    data: JSON.stringify({
+                        user_name: $(".ipt_user").val(),
+                        user_psw: $(".ipt_old").val(),
+                        ipt_new: $(".ipt_ynew").val()
+                    }),
+                    success: (data) => {
+                        if(data == "err"){
+                            alert("输入的账号密码不正确！")
+                        }else if(data){
+                            alert("密码修改成功！")
+                        }
+                    },
+                    error: (err) => {
+                        console.log(err);
+                    }
+                });
+            }else{
+                alert("两次新密码必须相同，并且密码不能为空！");
+            }
+        })
+
+    }
+
+
+
+    // 查看留言并且渲染
+    {
+        let ly_md = function () {
+            return new Promise(function (resolve, reject) {
+                if (vuex_dlkg) {
+                    $.ajax({
+                        type: "GET",
+                        url: "http://"+ip+"/leav/msg?user_name=" + user_name,
+                        dataType: "json",
+                        success: function (data) {
+                            resolve(data);
+                        },
+                        error: function (err) {
+                            console.log(err);
+                        }
+                    });
+                } else {
+                    alert("请先登录！")
+                }
+            });
+        };
+        let add_ly = function (res) {
+            return new Promise(function (resolve, reject) {
+                $(".liuy").html('');
+                for (i in res) {
+                    $(".liuy").append("<p class='leav_p'>" + res[i].user_name + ":" + res[i].user_leav + "<button class='del_leav'>删除留言</button></p>");
+                }
+                resolve(res);
+            });
+        };
+        $(".look_leav").on("click", function () {
+            ly_md().then(add_ly);
+        });
+    }
+
+
+
+    // 删除留言
+    $(".liuy").on("click", ".del_leav", function () {
+        let num = $(this).parent('.leav_p').index();
+        let leav_id = liuyan_msg[num].leav_id;
+        let user_name = liuyan_msg[num].user_name;
+        let user_leav = liuyan_msg[num].user_leav;
+        $.ajax({
+            type: "GET",
+            url: "http://"+ip+"/del/leav?leav_id=" + leav_id + "&user_name=" + user_name + "&user_leav=" + user_leav,
+            dataType: "json",
+            success: (data) => {
+            },
+            error: (err) => {
+                console.log(err);
+            }
+        });
+    });
+
+
+
+    // 添加留言
+    $(".add_leav").on("click", () => {
+        if (vuex_dlkg) {
+            $.ajax({
+                type: "GET",
+                url: "http://"+ip+"/leav/msg?user_name=" + user_name + "&user_leav=" + $(".add_leav_ipt").val(),
+                dataType: "json",
+                success: (data) => {
+                    liuyan_msg = data;
+                },
+                error: (err) => {
+                    console.log(err);
+                }
+            });
+        } else {
+            alert("请先登录！")
+        }
+    });
+
+
+    // 账号注册
+    $(".sbm").on("click", () => {
+        $.ajax({
+            type: "POST",
+            url: "http://"+ip+"/user/msg",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            data: JSON.stringify({
+                user_name: $(".user_name").val(),
+                user_psw: $(".user_psw").val()
+            }),
+            success: (data) => {
+                if (data === true) {
+                    alert("恭喜您" + $(".user_name").val() + "注册成功！");
+                } else {
+                    alert("注册失败！");
+                };
+            },
+            error: (err) => {
+                console.log(err);
+            }
+        });
+    });
+
+
+
+    // 账号登录
+    $(".denglu").on("click", () => {
+        $.ajax({
+            type: "POST",
+            url: "http://"+ip+"/user/login",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            data: JSON.stringify({
+                user_name: $(".login_name").val(),
+                user_psw: $(".login_psw").val()
+            }),
+            success: (data) => {
+                if (data === $(".login_name").val()) {
+                    alert("登陆成功！");
+                    $(".gxdl").text("恭喜" + data + "登录成功！");
+                    vuex_dlkg = true;
+                    user_name = $(".login_name").val();
+                } else {
+                    alert("用户名或密码错误！");
+                    vuex_dlkg = false;
+                    $(".gxdl").text("登陆失败，用户名或密码错误！");
+                }
+            },
+            error: (err) => {
+                console.log(err);
+            }
+        });
+    });
+
+
+    // 删除账号
+    $(".delUser").on("click", () => {
+        $.ajax({
+            type: "POST",
+            url: "http://"+ip+"/del/user",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            data: JSON.stringify({
+                user_name: $(".del_name").val(),
+                user_psw: $(".del_psw").val()
+            }),
+            success: (data) => {
+                if (data === false) {
+                    alert('删除失败！用户不存在或密码错误！');
+                } else {
+                    alert('恭喜您成功删除用户' + data);
+                    $(".gxdl").text("请先登录！");
+                }
+            },
+            error: (err) => {
+                console.log(err);
+            }
+        });
+    });
+</script>
