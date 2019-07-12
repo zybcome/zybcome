@@ -1,21 +1,23 @@
 <template>
   <div id="app">
-    <!-- <router-view/> -->
-    <Login></Login>
+    <router-view></router-view>
+    <!-- <Login></Login> -->
+    <!-- <Index></Index> -->
   </div>
 </template>
 
 <script>
 import Login from "@/components/login/login"
+import Index from "@/components/index/index"
+import Register from "@/components/index/index"
 export default {
   name: 'App',
   components:{
-    Login
+    Login,Index,Register
   }
 }
 </script>
 
 <style>
-
 
 </style>

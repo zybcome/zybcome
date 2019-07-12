@@ -1,6 +1,7 @@
 <template>
   <div class="login">
     <h1 class="title">登录</h1>
+    <router-link to="/register">没有账号立即注册</router-link>
     <ul class="login_ul">
       <li class="login_li">
         <img class="user_img" src="./../../assets/logo.png" alt />
@@ -16,7 +17,7 @@
         />
       </li>
       <li class="login_li">
-        <button @click="login_" class="login_btn">登录</button>
+          <button @click="login_" class="login_btn">登录</button>
       </li>
     </ul>
   </div>
@@ -41,14 +42,16 @@ export default {
         })
         .then(function(data) {
           if (data.data === that.login_name) {
-            alert("登陆成功！");
-            that.$store.LoginStatus = true;
+            // alert("登陆成功！");
+            that.$store.state.LoginStatus = true;
+            console.log(that.$store.state.LoginStatus);
+            that.$router.push('/index')
           } else {
             alert("用户名或密码错误！");
-            that.$store.LoginStatus = false;
+            that.$store.state.LoginStatus = false;
+            console.log(that.$store.state.LoginStatus);
           }
         });
-        console.log(this.$store.state.LoginStatus);
     }
   }
 };
