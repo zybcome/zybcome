@@ -1,0 +1,1 @@
+<view><view class="public_img" style="{{('background:url('+img_url+publicTitleImg+') center no-repeat;background-size: cover')}}"></view></view>

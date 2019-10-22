@@ -1,0 +1,34 @@
+.ser_list {
+  width: 100%;
+  padding-top: 30rpx;
+}
+.ser_list .ser_ul {
+  width: 95%;
+  overflow: hidden;
+  margin: 0 auto;
+}
+.ser_list .ser_ul .ser_li {
+  width: 50%;
+  float: left;
+  overflow: hidden;
+}
+.ser_list .ser_ul .ser_li .ser_li_bk {
+  background: white;
+  width: 90%;
+  margin: 20rpx auto;
+  text-align: center;
+  overflow: hidden;
+  -webkit-box-shadow: 0 0 10px 0px #e2e2e2;
+          box-shadow: 0 0 10px 0px #e2e2e2;
+}
+.ser_list .ser_ul .ser_li .ser_li_bk .ser_li_img {
+  width: 50%;
+  height: 180rpx;
+  margin: 20rpx auto;
+}
+.ser_list .ser_ul .ser_li .ser_li_bk .ser_li_p {
+  font-size: 32rpx;
+  font-weight: bold;
+  margin: 20rpx 0;
+}
+

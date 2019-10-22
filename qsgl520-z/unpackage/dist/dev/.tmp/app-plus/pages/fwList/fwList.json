@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "uni-drawer": "/components/uni-drawer.1/uni-drawer"
+  },
+  "component": true
+}

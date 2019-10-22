@@ -1,0 +1,1 @@
+<view class="content"><head vue-id="1" text="我的页面" bind:__l="__l"></head><image class="logo" src="/static/logo.png"></image><view class="text-area"><text data-event-opts="{{[['tap',[['login',['$event']]]]]}}" class="title" bindtap="__e">{{title}}</text></view></view>

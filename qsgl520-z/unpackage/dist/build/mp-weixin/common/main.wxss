@@ -1,0 +1,110 @@
+/*每个页面公共css */
+.wei_login_btn {
+  height: 50rpx;
+  line-height: 50rpx;
+  margin-top: 20rpx;
+  font-size: 28rpx;
+}
+.swiper-item {
+  width: 100%;
+  height: 400rpx;
+}
+#swiper {
+  height: 500rpx;
+}
+.index_title {
+  position: fixed;
+  width: 95%;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  padding: 20rpx;
+  background: white;
+  -webkit-box-shadow: 0 0 20rpx 0rpx #b9b9b9;
+          box-shadow: 0 0 20rpx 0rpx #b9b9b9;
+}
+.my_center_title_img {
+  margin-top: 25rpx !important;
+}
+.my_center_title_img image {
+  width: 100rpx !important;
+  height: 100rpx !important;
+}
+.uni-list-cell__container {
+  padding: 5rpx 30rpx !important;
+}
+.uni-list-cell__icon-img {
+  width: 80rpx !important;
+  height: 88rpx !important;
+}
+.public_title_top {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  padding-top: 20rpx;
+}
+.vxin_lb {
+  padding-top: 110rpx !important;
+  height: 880rpx !important;
+}
+.vxin_lb .cham_list {
+  top: 390rpx !important;
+}
+.tanchu_red {
+  color: red;
+}
+.uni-popup {
+  font-size: 24rpx;
+}
+.wdl_position {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+.public_tt {
+  zoom: 1;
+  background: white;
+  padding: 20rpx 0;
+  -webkit-box-shadow: 0 0 20rpx 0rpx #b9b9b9;
+          box-shadow: 0 0 20rpx 0rpx #b9b9b9;
+  border-bottom: 1px solid #c5c5c5;
+  background: #efefef;
+}
+.public_tt::after {
+  clear: both;
+  display: block;
+  content: '';
+}
+.public_shu {
+  height: 30rpx;
+  width: 6rpx;
+  background: #ffb200;
+  float: left;
+  margin-left: 20rpx;
+  margin-top: 15rpx;
+}
+.public_title {
+  color: #333;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 32rpx;
+  margin-left: 20rpx;
+  float: left;
+  font-weight: bold;
+}
+.uni-body {
+  background: #fafbfb;
+}
+page {
+  background: #fafbfb;
+}
+.gd_map,
+.tx_map {
+  text-decoration: none;
+  color: white;
+  font-size: 40rpx;
+}
+

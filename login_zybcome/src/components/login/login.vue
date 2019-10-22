@@ -4,11 +4,11 @@
     <router-link to="/register">没有账号立即注册</router-link>
     <ul class="login_ul">
       <li class="login_li">
-        <img class="user_img" src="./../../assets/logo.png" alt />
+        <img class="user_img" src="./../../assets/user_img.png" alt />
         <input class="login_input login_name" v-model="login_name" type="text" placeholder="请输入用户名" />
       </li>
       <li class="login_li">
-        <img class="user_img" src="./../../assets/logo.png" alt />
+        <img class="user_img" src="./../../assets/psw_img.png" alt />
         <input
           class="login_input login_psw"
           v-model="login_psw"
@@ -17,7 +17,7 @@
         />
       </li>
       <li class="login_li">
-          <button @click="login_" class="login_btn">登录</button>
+        <button @click="login_" class="login_btn">登录</button>
       </li>
     </ul>
   </div>
@@ -41,15 +41,19 @@ export default {
           user_psw: this.login_psw
         })
         .then(function(data) {
-          if (data.data === that.login_name) {
+          console.log(data.data);
+          localStorage.token = data.data.token;
+          localStorage.user_name = data.data.user_name;
+          if (data.data.token) {
             // alert("登陆成功！");
             that.$store.state.LoginStatus = true;
-            console.log(that.$store.state.LoginStatus);
-            that.$router.push('/index')
+            that.$store.state.UserName = data.data.user_name;
+            // console.log(that.$store.state.LoginStatus);
+            that.$router.push("/index");
           } else {
             alert("用户名或密码错误！");
             that.$store.state.LoginStatus = false;
-            console.log(that.$store.state.LoginStatus);
+            // console.log(that.$store.state.LoginStatus);
           }
         });
     }

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- <script src="/socket.io/socket.io.js"></script> -->
+</head>
+
+<body>
+    <div class="all">
+        <label for="">注册账号</label><input v-model="register_name" type="text" placeholder="账号">
+        <label for="">注册密码</label><input v-model="register_psw" type="password" placeholder="密码">
+        <button @click="regist_">立即注册</button>
+        <br>
+        <label for="">查询账号</label><input v-model="boy_name" type="text" placeholder="查询账号">
+        <button @click="query_">查询</button>
+        <p>{{query_boy}}</p>
+        <!-- <input v-model="send_msg" type="text"><button @click="send_">发送</button> -->
+    </div>
+</body>
+
+</html>
+<script>
+    new Vue({
+        el: ".all",
+        data: {
+            ip: '127.0.0.1:5566',
+            register_name: '',
+            register_psw: '',
+            boy_name: '',
+            query_boy: '',
+            send_msg: ''
+        },
+        methods: {
+            regist_() {
+                var register_date = new Date().getTime().toString();
+                // console.log(typeof register_date)
+                axios.post("http://" + this.ip + "/addUser", {
+                    register_name: this.register_name,
+                    register_psw: this.register_psw,
+                    register_date: register_date
+                }).then(function (data) {
+                    console.log(data);
+                })
+            },
+            query_() {
+                var that = this
+                axios.post("http://" + this.ip + "/queryBoy", {
+                    boy_name: this.boy_name
+                }).then(function (data) {
+                    that.query_boy = data.data
+                })
+            }
+        }
+    })
+</script>

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "企山创业园-完善信息",
+  "usingComponents": {
+    "uni-popup": "/components/uni-popup/uni-popup"
+  }
+}

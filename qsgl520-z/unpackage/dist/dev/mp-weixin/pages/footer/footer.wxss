@@ -1,0 +1,100 @@
+.contact_as {
+  width: 90%;
+  margin: 40rpx auto;
+  border-radius: 10rpx;
+  overflow: hidden;
+  -webkit-box-shadow: 0 0 10rpx 0rpx #e2e2e2;
+          box-shadow: 0 0 10rpx 0rpx #e2e2e2;
+}
+.contact_as .contact_as_ul {
+  background: white;
+  overflow: hidden;
+}
+.contact_as .contact_as_ul .contact_as_li {
+  width: 100%;
+  display: block;
+  overflow: hidden;
+  margin-top: 40rpx;
+}
+.contact_as .contact_as_ul .contact_as_li .contact_as_li_left {
+  width: 25%;
+  float: left;
+}
+.contact_as .contact_as_ul .contact_as_li .contact_as_li_left .contact_as_li_left_p {
+  text-align: right;
+  font-size: 32rpx;
+  line-height: 60rpx;
+}
+.contact_as .contact_as_ul .contact_as_li .contact_as_li_right {
+  width: 75%;
+  float: left;
+}
+.contact_as .contact_as_ul .contact_as_li .contact_as_li_right .contact_as_li_right_input {
+  width: 80%;
+  border-bottom: 1px solid #999999;
+  height: 60rpx;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-size: 28rpx;
+  margin-left: 20rpx;
+}
+.contact_as .contact_as_ul .contact_as_li .contact_as_li_right .contact_as_li_right_text {
+  padding: 20rpx;
+  width: 80%;
+  border: 1px solid #999999;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-size: 28rpx;
+  margin-left: 20rpx;
+}
+.contact_as .contact_as_ul .contact_as_li .tijiao_liuy {
+  width: 45%;
+  border: #007aff 1px solid;
+  text-align: center;
+  margin: 0 auto;
+  border-radius: 30rpx;
+  height: 60rpx;
+  background: #007aff;
+  line-height: 60rpx;
+  color: white;
+  margin-bottom: 40rpx;
+  font-size: 30rpx;
+}
+.qscy_fw {
+  width: 90%;
+  margin: 40rpx auto;
+  border-radius: 10rpx;
+  overflow: hidden;
+  -webkit-box-shadow: 0 0 10rpx 0rpx #e2e2e2;
+          box-shadow: 0 0 10rpx 0rpx #e2e2e2;
+}
+.qscy_fw .qscy_fw_ul {
+  background: white;
+  overflow: hidden;
+}
+.qscy_fw .qscy_fw_ul .qscy_fw_li {
+  width: 50%;
+  display: block;
+  padding: 20rpx 0;
+  float: left;
+}
+.qscy_fw .qscy_fw_ul .qscy_fw_li .qscy_fw_img {
+  width: 100rpx;
+  height: 100rpx;
+  display: block;
+  margin: 20rpx auto;
+}
+.qscy_fw .qscy_fw_ul .qscy_fw_li .qscy_fw_p1 {
+  text-align: center;
+  font-size: 32rpx;
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+}
+.qscy_fw .qscy_fw_ul .qscy_fw_li .qscy_fw_p2 {
+  text-align: center;
+  font-size: 24rpx;
+  margin-bottom: 20rpx;
+  color: #007aff;
+  padding: 0 28rpx;
+}
+

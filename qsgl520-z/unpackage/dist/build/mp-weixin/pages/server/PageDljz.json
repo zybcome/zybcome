@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "企山创业园-代理记账",
+  "usingComponents": {
+    "public-title": "/pages/head/publicTitle",
+    "footer": "/pages/footer/footer"
+  }
+}

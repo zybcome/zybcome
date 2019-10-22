@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "my",
+  "usingComponents": {
+    "head": "/pages/head/head"
+  }
+}

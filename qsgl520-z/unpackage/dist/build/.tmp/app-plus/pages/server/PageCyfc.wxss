@@ -1,0 +1,155 @@
+.cyfc_dx {
+  width: 90%;
+  margin: 0 auto;
+  margin-top: -40rpx;
+  border-radius: 10rpx;
+  overflow: hidden;
+  -webkit-box-shadow: 0 0 10rpx 0rpx #e2e2e2;
+          box-shadow: 0 0 10rpx 0rpx #e2e2e2;
+}
+.cyfc_dx .cyfc_dx_ul {
+  overflow: hidden;
+  background: white;
+}
+.cyfc_dx .cyfc_dx_ul .cyfc_dx_li {
+  width: 50%;
+  float: left;
+}
+.cyfc_dx .cyfc_dx_ul .cyfc_dx_li .cyfc_dx_bk {
+  width: 95%;
+  margin: 5px auto;
+  text-align: center;
+  overflow: hidden;
+  border: 1px solid #00a0e9;
+  border-top: 3px solid #00a0e9;
+}
+.cyfc_dx .cyfc_dx_ul .cyfc_dx_li .cyfc_dx_bk .cyfc_dx_img {
+  width: 180rpx;
+  height: 180rpx;
+  display: block;
+  margin: 20rpx auto;
+}
+.cyfc_dx .cyfc_dx_ul .cyfc_dx_li .cyfc_dx_bk .cyfc_dx_p {
+  font-size: 28rpx;
+  color: #333;
+  line-height: 60rpx;
+}
+.cyfc_dx .cyfc_dx_ul .cyfc_dx_li:nth-child(3) {
+  width: 100%;
+}
+.cyfc_dx .cyfc_dx_ul .cyfc_dx_li:nth-child(3) .cyfc_dx_bk {
+  width: 97%;
+}
+.cyfc_fw {
+  width: 90%;
+  margin: 40rpx auto;
+  border-radius: 10rpx;
+  overflow: hidden;
+  -webkit-box-shadow: 0 0 10rpx 0rpx #e2e2e2;
+          box-shadow: 0 0 10rpx 0rpx #e2e2e2;
+}
+.cyfc_fw .cyfc_fw_ul {
+  overflow: hidden;
+  background: white;
+}
+.cyfc_fw .cyfc_fw_ul .cyfc_fw_li {
+  width: 50%;
+  float: left;
+}
+.cyfc_fw .cyfc_fw_ul .cyfc_fw_li .cyfc_fw_bk {
+  width: 95%;
+  margin: 5px auto;
+  text-align: center;
+  overflow: hidden;
+  border: 1px solid #f39800;
+}
+.cyfc_fw .cyfc_fw_ul .cyfc_fw_li .cyfc_fw_bk .cyfc_fw_img {
+  width: 180rpx;
+  height: 180rpx;
+  display: block;
+  margin: 20rpx auto;
+}
+.cyfc_fw .cyfc_fw_ul .cyfc_fw_li .cyfc_fw_bk .cyfc_fw_p {
+  font-size: 28rpx;
+  color: white;
+  line-height: 60rpx;
+  background: #f39800;
+}
+.cyfc_yh {
+  width: 90%;
+  margin: 40rpx auto;
+  border-radius: 10rpx;
+  overflow: hidden;
+  -webkit-box-shadow: 0 0 10rpx 0rpx #e2e2e2;
+          box-shadow: 0 0 10rpx 0rpx #e2e2e2;
+}
+.cyfc_yh .cyfc_yh_ul {
+  overflow: hidden;
+  background: white;
+}
+.cyfc_yh .cyfc_yh_ul .cyfc_yh_li {
+  width: 33.3%;
+  float: left;
+}
+.cyfc_yh .cyfc_yh_ul .cyfc_yh_li .cyfc_yh_bk {
+  width: 95%;
+  margin: 5px auto;
+  text-align: center;
+  overflow: hidden;
+  border: 1px solid #f39800;
+}
+.cyfc_yh .cyfc_yh_ul .cyfc_yh_li .cyfc_yh_bk .cyfc_yh_img {
+  width: 180rpx;
+  height: 180rpx;
+  display: block;
+  margin: 20rpx auto;
+}
+.cyfc_yh .cyfc_yh_ul .cyfc_yh_li .cyfc_yh_bk .cyfc_yh_p {
+  font-size: 28rpx;
+  color: white;
+  line-height: 60rpx;
+  background: #f39800;
+}
+.cyfc_cy {
+  width: 90%;
+  margin: 40rpx auto;
+  border-radius: 10rpx;
+  overflow: hidden;
+  -webkit-box-shadow: 0 0 10rpx 0rpx #e2e2e2;
+          box-shadow: 0 0 10rpx 0rpx #e2e2e2;
+}
+.cyfc_cy .cyfc_cy_ul {
+  overflow: hidden;
+  background: white;
+}
+.cyfc_cy .cyfc_cy_ul .cyfc_cy_li {
+  width: 50%;
+  float: left;
+  background: white;
+  overflow: hidden;
+}
+.cyfc_cy .cyfc_cy_ul .cyfc_cy_li .cyfc_cy_bk {
+  width: 95%;
+  margin: 10rpx auto;
+  background: #1977c6;
+  color: white;
+  text-align: center;
+  overflow: hidden;
+}
+.cyfc_cy .cyfc_cy_ul .cyfc_cy_li .cyfc_cy_bk .cyfc_cy_img {
+  width: 40%;
+  height: 125rpx;
+  display: block;
+  margin: 40rpx auto;
+}
+.cyfc_cy .cyfc_cy_ul .cyfc_cy_li .cyfc_cy_bk .cyfc_cy_tit {
+  font-size: 36rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+}
+.cyfc_cy .cyfc_cy_ul .cyfc_cy_li .cyfc_cy_bk .cyfc_cy_p1 {
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 24rpx;
+}
+

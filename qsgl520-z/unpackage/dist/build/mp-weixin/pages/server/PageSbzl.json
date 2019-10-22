@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "企山创业园-商标专利",
+  "usingComponents": {
+    "public-title": "/pages/head/publicTitle",
+    "footer": "/pages/footer/footer"
+  }
+}

@@ -10,6 +10,21 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
   },
+  onShareAppMessage: function (res) {
+    var that = this;
+    return {
+      title: '',
+      path: '/pages/list/list?id=' + that.data.scratchId,
+      success: function (res) {
+        // 转发成功
+
+        that.shareClick();
+      },
+      fail: function (res) {
+        // 转发失败
+      }
+    }
+  },
   bindReason(e) {
     this.setData({
       reason: e.detail.value

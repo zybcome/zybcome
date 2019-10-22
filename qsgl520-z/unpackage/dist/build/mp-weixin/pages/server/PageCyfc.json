@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "企山创业园-创业扶持",
+  "usingComponents": {
+    "public-title": "/pages/head/publicTitle",
+    "footer": "/pages/footer/footer"
+  }
+}

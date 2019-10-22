@@ -1,0 +1,1 @@
+<view class="content"><head vue-id="1" text="首页头部" bind:__l="__l"></head><image class="logo" src="/static/logo.png"></image><view class="text-area"><text data-event-opts="{{[['tap',[['login',['$event']]]]]}}" class="title" bindtap="__e">{{title}}</text></view><navigator url="./../login/login">跳转到登录页面</navigator><navigator url="./../swiper/swiper">跳转到swiper</navigator></view>

@@ -1,0 +1,182 @@
+{
+    "attr": {
+        "aliTalk": {
+            "categoryId": "315",
+            "infoId": "529655802386",
+            "loginId": "芷歌1990",
+            "type": "normal"
+        },
+        "brand": {
+            "enable": false
+        },
+        "company": {
+            "bizTypeName": "生产加工",
+            "city": "广州市天河区",
+            "factoryName": "广州子歌",
+            "name": "广州市子歌贸易有限公司",
+            "province": "广东",
+            "shiliType": "factory"
+        },
+        "id": "529655802386",
+        "industrialBelt": {
+            "enable": true,
+            "shortName": "广州",
+            "url": "http://guangzhou.1688.com/openservice/p4p114OfferResultViewService?from=searchweb2.0"
+        },
+        "information": {},
+        "marketOfferTag": {
+            "colorCount": {
+                "enable": true,
+                "text": "12色"
+            },
+            "newUserFirstFreePost": {
+                "enable": false
+            },
+            "newUserSpOffer": {
+                "enable": false
+            },
+            "sizeCount": {
+                "enable": true,
+                "text": "8码"
+            }
+        },
+        "offerSource": {
+            "fromBrandMall": false,
+            "fromCaigou": false,
+            "fromDaixiao": true,
+            "fromFreeSample": true,
+            "fromHuopin": false,
+            "fromSheZhang": false,
+            "fromShili": true,
+            "fromTaoFactory": false,
+            "fromWholesaleSmall": false,
+            "locked": false,
+            "showBrandMallHoverInfo": false
+        },
+        "sameAndSimilarDesign": {
+            "sameDesign": {
+                "count": 11,
+                "enable": true,
+                "url": "http://s.1688.com/collaboration/collaboration_search.htm?fromOfferId=529655802386&tab=sameDesign&showStyle=img&uniqfield=userid&sortType=booked&descendOrder=true&filt=y&autoSimilarTab=true#topoffer"
+            },
+            "sameShop": {
+                "enable": false
+            },
+            "similarDesign": {
+                "enable": true,
+                "url": "http://s.1688.com/collaboration/collaboration_search.htm?fromOfferId=529655802386&tab=similarDesign&showStyle=shopwindow#topoffer"
+            }
+        },
+        "tradePrice": {
+            "freightPrice": {
+                "enable": false,
+                "free": false,
+                "value": {
+                    "decimals": 0,
+                    "integer": 0
+                }
+            },
+            "offerPrice": {
+                "discount": false,
+                "enable": true,
+                "locked": false,
+                "originalValue": {
+                    "decimals": 0,
+                    "integer": 21
+                },
+                "quantityPrices": [
+                    {
+                        "quantity": "2~799",
+                        "value": {
+                            "decimals": 0,
+                            "integer": 21
+                        }
+                    },
+                    {
+                        "quantity": "≥800",
+                        "value": {
+                            "decimals": 0,
+                            "integer": 18
+                        }
+                    }
+                ],
+                "value": {
+                    "decimals": 0,
+                    "integer": 18
+                }
+            }
+        },
+        "tradeQuantity": {
+            "buyerCount": 0,
+            "number": 6848,
+            "sortType": "30days",
+            "sortTypeUnit": "件",
+            "unit": "件"
+        },
+        "tradeService": {
+            "brokenPackageReissue": false,
+            "businessInspection": true,
+            "buyerEnsure": true,
+            "deliveryHours": 0,
+            "deliveryTimeEnsure": true,
+            "factoryInspection": false,
+            "freeAccount": false,
+            "genuineSecurity": false,
+            "goldSupplier": false,
+            "inspectionCreditUrl": "http://shop1433350418706.1688.com/page/creditdetail.htm#company-depth-auth",
+            "materialQualityEnsure": true,
+            "onlineTrade": true,
+            "regionAuthentication": false,
+            "replaceEnsureDays": 15,
+            "tpCreditUrl": "http://shop1433350418706.1688.com/page/creditdetail.htm",
+            "tpMember": true,
+            "tpYear": 5
+        }
+    },
+    "bidPrice": 325,
+    "categoryId": 0,
+    "clickurl": "'p4psale_search_window_1_0_j_j20_{clickArea}__0_%B6%CC%D0%E4','0','%B6%CC%D0%E4','819336_1008','0','{clickArea}'",
+    "ctr": 227,
+    "discountPrice": {
+        "id": "529655802386",
+        "price": 18.0,
+        "zkCat": "",
+        "zkPrice": 0.0,
+        "zkRate": 0,
+        "zkSource": 0,
+        "zkTime": 0
+    },
+    "eurl": "https://dj.1688.com/ci_bb?a=290434710&e=mNr5UgFhPueonEusNwbtLEVkj-6LUKLv1w5Gz-X-o11F6pM3UpwOO.JZ3Cn18lvCzc7LU5QlZQ3usX19Urg99qSeoXeufDqrKNCmqJNb8WEVAeqB7bx3II0ciiPGwl.2ybv-ZQ6GBeSxkvu2UYYJNVdXmI.b21C7.faUFjRhP9AKsq045ZvYt3dlfV7DiA2-VbkuULzeK-ZOsAlxYEpiaxOcMjIxS0.A19GkHvqKgtG8AnqVLgLjBZT8l2ayhVeQQxCZGmr.Ib56fF.VHmeBX4AiqNzD4ekuYei4p1k8J49I4cyp1TFljgzbllN9lqcJ.5.WiABfKHClYJJPbCaHDUwZEW1HYhKwDo7eO8AvF90EQPRSjU-zA12xRWgpWhJ2aCJmXU3Mv7IBDW6LlBrwfS.HJyB.X9hT.Zy5-2KEczW7.9GHT7LZhVK6GZ5dNSDc5cY5mbGhaszNt6fIarAmuMjwsTahZiBONP6sVyql6r30u6vYt4rcJMm7.mUOhgXkITIuWyI5vtJmHOfvpzYwPCzNRNz4sdeBl4vew90Z2GRkUr.hYkgPHGRN.soDfvy6jf71tuq1vCG60Irh.a5E-9f4.V92ECDZ.gPW4aQYI-PIZXkSbmYCxz7CRq1L1CPZJ30dMc.8ODInAX-Yw.LxJg__&v=4&ap=1&rp=1",
+    "imgUrl": "https://cbu01.alicdn.com/img/ibank/2018/613/372/8930273316_589969299.220x220.jpg",
+    "impressionEurl": "https://dj.1688.com/ci_bb?a=290434710&e=mNr5UgFhPueonEusNwbtLEVkj-6LUKLv1w5Gz-X-o11F6pM3UpwOO.JZ3Cn18lvCzc7LU5QlZQ3usX19Urg99qSeoXeufDqrKNCmqJNb8WEVAeqB7bx3II0ciiPGwl.2ybv-ZQ6GBeSxkvu2UYYJNVdXmI.b21C7.faUFjRhP9AKsq045ZvYt3dlfV7DiA2-VbkuULzeK-ZOsAlxYEpiaxOcMjIxS0.A19GkHvqKgtG8AnqVLgLjBZT8l2ayhVeQQxCZGmr.Ib56fF.VHmeBX4AiqNzD4ekuYei4p1k8J49I4cyp1TFljgzbllN9lqcJ.5.WiABfKHClYJJPbCaHDUwZEW1HYhKwDo7eO8AvF90EQPRSjU-zA12xRWgpWhJ2aCJmXU3Mv7IBDW6LlBrwfS.HJyB.X9hT.Zy5-2KEczW7.9GHT7LZhVK6GZ5dNSDc5cY5mbGhaszNt6fIarAmuMjwsTahZiBONP6sVyql6r30u6vYt4rcJMm7.mUOhgXkITIuWyI5vtJmHOfvpzYwPCzNRNz4sdeBl4vew90Z2GRkUr.hYkgPHGRN.soDfvy6jf71tuq1vCG60Irh.a5E-9f4.V92ECDZ.gPW4aQYI-PIZXkSbmYCxz7CRq1L1CPZJ30dMc.8ODInAX-Yw.LxJg__&v=4&ap=1&rp=1&action=feedback",
+    "isP4P": true,
+    "loginId": "芷歌1990",
+    "memberId": "b2b-2548517911btknh",
+    "memberTags": "81281,3438145,47745,82817,205185,115969,205057,52225,93697,23488,38401,102912,57473,15168,6272,17665,81409,205313,224385,515841,2999553",
+    "offerid": "529655802386",
+    "p4P": true,
+    "planType": 10,
+    "price": 0.0,
+    "priceMoney": {
+        "amount": 18.00,
+        "cent": 1800,
+        "centFactor": 100,
+        "currency": "CNY"
+    },
+    "privateInfo": 0,
+    "quantityBegin": 0,
+    "salesVolume": 0,
+    "showCust": false,
+    "sortIndex": 0,
+    "strPriceMoney": "18.00",
+    "tP": false,
+    "title": "工作服定制polo衫企业<font color=red>短袖</font>工衣t恤定制diy广告衫定做刺绣印字logo",
+    "tpServiceYear": 0,
+    "useAlipay": false
+},
+
+
+
+https://dj.1688.com/ci_bb?a=89550353&e=ky5hSPCNRiZ6XolI9LrFv-4qSfn-HpsPIP33VBSeM1PIOGlpgzMp1Uea22yE0RiJMXTk9dt1SkdJaj7C6nqFBZ1PLC1YoSH-fEJmZzmPSAdSlrWH3E8iF05aV5umrYpWI2MvAn73cRKnzlHWZU.MvR-tUvS.Z38IYPuM4XKBWsBgAqwHgM2HNeReXN1b0k29koiwbuDMlWm9t96EBofBZYwh4JBg5cB61F6Qa4LUe62x7hXLtHqmol58VbVs0peUHVYzItxYBcPbKqbNvSUL98NFJC3lLkepzVQXAbtCjeGHWcB9djHx7D8a7IyR3utvLHsnGHpuFcFs3OgC9pPCqyWxoHV8rp3mP0WouolK9w2xH95AFS7K9DmyMnigCNGYdLwS5w.k.X3qpwSy5.CuM8gaRZATX0UHjOQ-NpV2qoSlQTqEblxmgA4H9JTvI26e5SXGQ7ncTPmk7Mt3URov7cygICZrH4hqZ-ygm2sRvU0VnO27Vg7iGyNjLwJ-93ESkbK3SKZ9FoZ0QURYQzii9pFGEKrtThbpD.Gz3wxgx8V2J7z3IKNMz4wLPaPLR.zGSRKheLK4XqXbnkG7OoVhZQgslbJTiQ8jSLZ62p4zB71k-HlpbsMAQGSVv1HaRBAm16wZoYBXhrnDJZ7QqUtKyUudX6xnUkifYr34rrSq5-TV267MSaBYuw__&v=4&ap=1&rp=1&idx=0
+
+https://detail.1688.com/offer/529655802386.html?spm=a312h.2018_new_sem.dh_002.1.4fd85053EGtGg9&tracelog=p4p&clickid=2de8cdb782904e518ea2c86fc032cb70&sessionid=8dea38cab34c87e73d3ec6b5b7c9aae6

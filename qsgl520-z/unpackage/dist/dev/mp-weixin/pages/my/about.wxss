@@ -1,0 +1,59 @@
+.gywe_cact {
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 40rpx;
+  border-radius: 10rpx;
+  overflow: hidden;
+  -webkit-box-shadow: 0 0 10rpx 0rpx #e2e2e2;
+          box-shadow: 0 0 10rpx 0rpx #e2e2e2;
+}
+.gywe_cact .gywe_cact_ul {
+  padding: 20rpx;
+}
+.gywe_cact .gywe_cact_ul .gywe_cact_li {
+  font-size: 28rpx;
+  line-height: 50rpx;
+}
+.gywe_cact .gywe_cact_ul .gywe_cact_li_1 {
+  font-size: 36rpx;
+  line-height: 60rpx;
+  color: #1977c6;
+  font-weight: bold;
+}
+.gywe_gsjj {
+  width: 90%;
+  margin: 0 auto;
+  margin-top: -40rpx;
+  border-radius: 10rpx;
+  overflow: hidden;
+  -webkit-box-shadow: 0 0 10rpx 0rpx #e2e2e2;
+          box-shadow: 0 0 10rpx 0rpx #e2e2e2;
+}
+.gywe_gsjj .gywe_gsjj_ul {
+  overflow: hidden;
+  background: white;
+}
+.gywe_gsjj .gywe_gsjj_ul .gywe_gsjj_li {
+  width: 92%;
+  margin: 20rpx auto;
+}
+.gywe_gsjj .gywe_gsjj_ul .gywe_gsjj_li .gywe_gsjj_p {
+  font-size: 28rpx;
+  color: #333;
+  line-height: 60rpx;
+  text-indent: 56rpx;
+}
+.gywe_addes {
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 40rpx;
+  border-radius: 10rpx;
+  overflow: hidden;
+  -webkit-box-shadow: 0 0 10rpx 0rpx #e2e2e2;
+          box-shadow: 0 0 10rpx 0rpx #e2e2e2;
+}
+.gywe_addes .gywe_addes_ul {
+  width: 100%;
+  height: 500rpx;
+}
+

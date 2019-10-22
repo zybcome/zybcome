@@ -1,0 +1,37 @@
+.cou_list {
+  width: 100%;
+  padding-top: 20rpx;
+  width: 90%;
+  margin: 0 auto;
+  border-radius: 10rpx;
+  overflow: hidden;
+  -webkit-box-shadow: 0 0 10rpx 0rpx #e2e2e2;
+          box-shadow: 0 0 10rpx 0rpx #e2e2e2;
+}
+.cou_list .cou_list_ul {
+  overflow: hidden;
+  margin: 0 auto;
+  background: white;
+}
+.cou_list .cou_list_ul .cou_list_li {
+  width: 100%;
+  overflow: hidden;
+}
+.cou_list .cou_list_ul .cou_list_li .cou_list_bk {
+  width: 80%;
+  height: 300rpx;
+  margin: 0 auto;
+  overflow: hidden;
+  position: relative;
+}
+.cou_list .cou_list_ul .cou_list_li .cou_list_bk .cou_list_kg {
+  width: 40%;
+  position: absolute;
+  height: 300rpx;
+  top: 0;
+  right: 0;
+}
+.cou_list .cou_list_ul .cou_list_li .cou_list_bk .cou_list_p {
+  margin-top: 100rpx;
+}
+

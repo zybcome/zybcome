@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "uni-drawer": "/components/uni-drawer/uni-drawer",
+    "fw-list": "/pages/fwList/fwList",
+    "uni-popup": "/components/uni-popup/uni-popup"
+  },
+  "component": true
+}

@@ -60,7 +60,23 @@
     let user_name = '';
     let liuyan_msg = '';
 
-
+    window.onload = function () {
+        console.log(localStorage.token);
+        url = "http://127.0.0.1:5566/checkUser";
+        var tok = window.localStorage.getItem('token');
+        // if (tok) {
+            $.ajax({
+                headers: { 'Authorization': tok },
+                dataType: "application/json; charset=utf-8",
+                url,
+                type: 'post',
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                }
+            })
+        // }
+    };
 
     // 修改密码
     {
@@ -77,9 +93,9 @@
                         ipt_new: $(".ipt_ynew").val()
                     }),
                     success: (data) => {
-                        if(data == "err"){
+                        if (data == "err") {
                             alert("输入的账号密码不正确！")
-                        }else if(data){
+                        } else if (data) {
                             alert("密码修改成功！")
                         }
                     },
@@ -87,7 +103,7 @@
                         console.log(err);
                     }
                 });
-            }else{
+            } else {
                 alert("两次新密码必须相同，并且密码不能为空！");
             }
         })
@@ -211,9 +227,12 @@
                 user_psw: $(".login_psw").val()
             }),
             success: (data) => {
-                if (data === $(".login_name").val()) {
+                console.log(data);
+
+                if (data.token !== '') {
                     alert("登陆成功！");
                     $(".gxdl").text("恭喜" + data + "登录成功！");
+                    localStorage.token = data.token;
                     vuex_dlkg = true;
                     user_name = $(".login_name").val();
                 } else {

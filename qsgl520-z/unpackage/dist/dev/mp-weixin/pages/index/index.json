@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "企山创业园",
+  "usingComponents": {
+    "head": "/pages/head/head",
+    "uni-popup": "/components/uni-popup/uni-popup"
+  }
+}

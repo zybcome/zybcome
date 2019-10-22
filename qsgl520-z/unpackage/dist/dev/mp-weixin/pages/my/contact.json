@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "企山创业园-联系我们",
+  "usingComponents": {
+    "public-title": "/pages/head/publicTitle",
+    "footer": "/pages/footer/footer",
+    "uni-popup": "/components/uni-popup/uni-popup"
+  }
+}

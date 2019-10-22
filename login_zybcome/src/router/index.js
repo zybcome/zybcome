@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/components/login/login'
 import Index from '@/components/index/index'
+import Image from '@/components/image/image'
 import Register from '@/components/register/register'
 
 Vue.use(Router)
@@ -27,6 +28,11 @@ export default new Router({
       path: '/login',
       name: 'Legister',
       component: Login
+    },
+    {
+      path: '/image',
+      name: 'Image',
+      component: Image
     }
 
   ]

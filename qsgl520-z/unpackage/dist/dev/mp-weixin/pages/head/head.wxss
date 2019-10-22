@@ -1,0 +1,51 @@
+.my_center_title {
+  zoom: 1;
+}
+.my_center_title .my_center_title_img {
+  float: left;
+}
+.my_center_title .my_center_title_right {
+  float: left;
+}
+.my_center_title .my_center_title_right .my_center_title_right_p1 {
+  margin-top: 28rpx;
+  font-size: 36rpx;
+  margin-left: 20rpx;
+  color: #333;
+}
+.my_center_title .my_center_title_right .my_center_title_right_p2 {
+  font-size: 24rpx;
+  margin-top: 10rpx;
+  margin-left: 20rpx;
+  color: #969696;
+}
+.my_center_title::after {
+  content: '';
+  display: block;
+  clear: both;
+}
+.title_logo {
+  width: 29%;
+  float: left;
+  height: 60rpx;
+  margin-left: 180rpx;
+}
+.title_logo uni-image {
+  width: 100%;
+  height: 60rpx;
+}
+.title_logo image {
+  width: 100%;
+  height: 60rpx;
+}
+.list_all_left {
+  float: left;
+}
+.list_all_left image {
+  width: 60rpx;
+  height: 60rpx;
+}
+.my_left {
+  float: left;
+}
+

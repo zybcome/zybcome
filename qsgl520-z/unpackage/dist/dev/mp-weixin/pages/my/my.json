@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "企山创业园-个人中心",
+  "usingComponents": {
+    "head": "/pages/head/head"
+  }
+}
