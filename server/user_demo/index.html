@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="register">注册</div>
+    <div class="login">登录</div>
+    <div class="add_leav">添加留言</div>
+    <div class="read_leav">获取留言</div>
+    <div class="all_leav">获取留言</div>
+    <!-- <div class="d_user">清空用户</div> -->
+    <!-- <div class="d_leav">清空留言</div> -->
+    <div class="quer_user">查询所有用户</div>
+    <div class="set_admin">修改管理员权限</div>
+</body>
+
+</html>
+<script>
+    $(".register").on("click", function () {
+        $.ajax({
+            url: 'http://127.0.0.1:3333/register',
+            type: 'post',
+            dataType: 'json',
+            data: {
+                "u_name": "zyb",
+                "u_psw": "123456",
+                "u_phone": "17630533363"
+            },
+            success: function (data) {
+                console.log(data);
+            }
+        });
+    });
+
+    $(".login").on("click", function () {
+        $.ajax({
+            url: 'http://127.0.0.1:3333/login',
+            type: 'post',
+            dataType: 'json',
+            data: {
+                "u_name": "zyb",
+                "u_psw": "123456"
+            },
+            success: function (data) {
+                console.log(data);
+                localStorage.setItem("token", data.token);
+                localStorage.setItem("u_id", data.data.u_id);
+                localStorage.setItem("u_name", data.data.u_name);
+                localStorage.setItem("u_time", data.data.u_time);
+            }
+        });
+    });
+    $(".read_leav").on("click", function () {
+        var token = localStorage.token;
+        if (token) {
+            $.ajax({
+                headers: { "Authorization": localStorage.token },
+                url: 'http://127.0.0.1:3333/read_leav',
+                type: 'post',
+                dataType: 'json',
+                data: {
+                    "u_id": localStorage.u_id,
+                },
+                success: function (data) {
+                    console.log(data);
+                    if (data == "2") {
+                        alert("登录以过期，请重新登录！")
+                    } else if (data == "3") {
+                        alert("请登录");
+                    }
+                }
+            })
+        } else {
+            alert("请登录");
+        }
+    });
+
+
+    $(".all_leav").on("click", function () {
+        var token = localStorage.token;
+        if (token) {
+            $.ajax({
+                headers: { "Authorization": localStorage.token },
+                url: 'http://127.0.0.1:3333/all_leav',
+                type: 'post',
+                dataType: 'json',
+                data: {
+                },
+                success: function (data) {
+                    console.log(data);
+                    if (data == "2") {
+                        alert("登录以过期，请重新登录！")
+                    } else if (data == "3") {
+                        alert("请登录");
+                    }
+                }
+            })
+        } else {
+            alert("请登录");
+        };
+    });
+
+
+    $(".add_leav").on("click", function () {
+        $.ajax({
+            headers: { "Authorization": localStorage.token },
+            url: 'http://127.0.0.1:3333/add_leav',
+            type: 'post',
+            dataType: 'json',
+            data: {
+                "u_id": localStorage.u_id,
+                "leav": "你好啊！"
+            },
+            success: function (data) {
+                if (data == "2") {
+                    alert("登录以过期，请重新登录！")
+                } else if (data == "3") {
+                    alert("请登录");
+                } else {
+                    console.log(data);
+                }
+            }
+        })
+    });
+
+
+    $(".quer_user").on("click", function () {
+        $.ajax({
+            headers: { "Authorization": localStorage.token },
+            url: 'http://127.0.0.1:3333/quer_user',
+            type: 'post',
+            dataType: 'json',
+            data: {
+                "u_id": localStorage.u_id
+            },
+            success: function (data) {
+                if (data == "2") {
+                    alert("登录以过期，请重新登录！")
+                } else if (data == "3") {
+                    alert("请登录");
+                } else if (data == "4") {
+                    alert("您没有管理员权限")
+                } else {
+                    console.log(data);
+                }
+            }
+        });
+    });
+
+
+    $(".set_admin").on("click", function () {
+        $.ajax({
+            headers: { "Authorization": localStorage.token },
+            url: 'http://127.0.0.1:3333/set_admin',
+            type: 'post',
+            dataType: 'json',
+            data: {
+                "u_id": localStorage.u_id,
+                "set_admin": 1,
+                "set_id": 2
+            },
+            success: function (data) {
+                if (data == "2") {
+                    alert("登录以过期，请重新登录！")
+                } else if (data == "3") {
+                    alert("请登录");
+                } else if (data == "4") {
+                    alert("您没有管理员权限")
+                } else if (data == "5") {
+                    alert("您没有超级管理员权限")
+                } else if (data == "6") {
+                    alert("设置的管理员权限不正确")
+                } else {
+                    console.log(data);
+                }
+            }
+        });
+    });
+
+
+    $(".d_user").on("click", function () {
+        $.ajax({
+            url: 'http://127.0.0.1:3333/d_user',
+            type: 'get',
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+            }
+        })
+    });
+
+
+    $(".d_leav").on("click", function () {
+        $.ajax({
+            url: 'http://127.0.0.1:3333/d_leav',
+            type: 'get',
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+            }
+        })
+    });
+</script>
