@@ -1,7 +1,9 @@
 <template>
   <div>
-    <input @change="file_" type="file" id="img" />
-    <button @click="fileSc">立即上传</button>
+    <!-- <input @change="file_" type="file" id="img" />
+    <button @click="fileSc">立即上传</button> -->
+    <h1 class="title">小功能</h1>
+    <router-link to="UpLoad"><el-button type="primary">打开识别图片文字功能</el-button></router-link>
   </div>
 </template>
 
@@ -35,7 +37,7 @@ export default {
         if (this.fileType == "image/png" || this.fileType == "image/jpeg") {
           var that = this;
           this.axios
-            .post("http://127.0.0.1:3355/user/fileImg", {
+            .post("https://www.ybcc.live:3355/user/fileImg1", {
               fileName: this.fileName,
               fileImg: this.fileImg,
               fileDate: this.fileDate,
@@ -55,5 +57,8 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="less">
+.title{
+  text-align: center;
+}
 </style>

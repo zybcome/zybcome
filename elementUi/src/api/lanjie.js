@@ -9,6 +9,7 @@ var intercept = function () {
             return config
         }else{
             console.log(1)
+            return config
         }
     }, function (error) {
         // 对请求错误做些什么
