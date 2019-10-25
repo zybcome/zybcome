@@ -59,15 +59,61 @@ export default {
     handleRemove(file, fileList) {},
     handlePreview(file) {},
     success_(response, file, fileList) {
-      console.log(response);
       if (response) {
-        this.loading = false;
-        this.img_msg.unshift(response);
-        this.img_list.unshift(response.url);
+        new Promise((resolve, reject) => {
+          let param = []; // 定义变量保存文字的y值
+          response.resultData.map(value => {
+            param.push(value.location.y); //获取y值push进去
+          });
+          let newArr = param.sort(function(a, b) {
+            return a - b;
+          });
+          resolve(newArr);
+        })
+          .then(newArr => {
+            var newMsg = [];
+            for (var i = 0; i < newArr.length; i++) {
+              // 循环原数组
+              for (var j = 0; j < response.resultData.length; j++) {
+                // 原数组的y值与排序后数组的y值进行对比
+                if (response.resultData[j].location.y == newArr[i]) {
+                  //如果结果值的y值等于排序后的y值 push进去msg
+                  newMsg.push(response.resultData[j]);
+                }
+              }
+            }
+            return newMsg;
+          })
+          .then(newMsg => {
+            this.loading = false;
+            response.resultData = newMsg;
+            this.img_msg.unshift(response);
+            this.img_list.unshift(response.url);
+          });
+      } else {
+        this.$alert("加载失败", "提示", {
+          confirmButtonText: "确定",
+          callback: action => {
+            // this.$message({
+            //   type: "info",
+            //   message: `action: ${action}`
+            // });
+          }
+        });
       }
     },
     error_(err, file, fileList) {
-      console.log(err);
+      if (err) {
+        this.$alert("图片上传失败", "提示", {
+          confirmButtonText: "确定",
+          callback: action => {
+            // this.$message({
+            //   type: "info",
+            //   message: `action: ${action}`
+            // });
+          }
+        });
+      }
     },
     beforeUpload(file) {
       // 图片不大于4m,宽度不大于2000
@@ -98,7 +144,7 @@ export default {
       });
     },
     progress(event, file, fileList) {
-      console.log(event);
+      // console.log(event);
       this.loading = true;
     }
   }
