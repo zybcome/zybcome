@@ -37,14 +37,14 @@ export default {
         if (this.fileType == "image/png" || this.fileType == "image/jpeg") {
           var that = this;
           this.axios
-            .post("https://www.ybcc.live:3355/user/fileImg1", {
+            .post(that.$store.state.api+"/user/fileImg1", {
               fileName: this.fileName,
               fileImg: this.fileImg,
               fileDate: this.fileDate,
               fileType: this.fileType
             })
             .then(function(data) {
-              console.log(data);
+              // console.log(data);
             });
         } else {
           alert("只允许上传png或jpg格式图片！");

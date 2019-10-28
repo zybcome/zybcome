@@ -7,10 +7,15 @@
   >
     <div class="updata">
       <h1 class="title">识别图片文字</h1>
+      <div v-if="!this.$store.state.status">
+        <p class="title_p">您还未登录</p>
+        <p class="title_p">登录后才可使用该功能</p>
+        <el-button type="primary" @click="ac_login">立即登录</el-button>
+      </div>
       <el-upload
         class="upload-demo"
         ref="upload"
-        action="https://www.ybcc.live:3355/user/fileImg"
+        :action="this.$store.state.api+'/user/fileImg'"
         :on-preview="handlePreview"
         :on-remove="handleRemove"
         :auto-upload="false"
@@ -18,6 +23,10 @@
         :on-error="error_"
         :before-upload="beforeUpload"
         :on-progress="progress"
+        :data="u_msg"
+        :headers="token"
+        :on-change="on_change"
+        v-if="this.$store.state.status"
       >
         <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
         <el-button
@@ -49,17 +58,42 @@ export default {
     return {
       img_msg: [],
       img_list: [],
-      loading: false
+      loading: false,
+      u_msg: {},
+      token: {
+        authorization: ""
+      }
     };
   },
+  mounted() {
+    if (
+      localStorage.getItem("token") == null ||
+      localStorage.getItem("token") == "" ||
+      localStorage.getItem("msg") == null ||
+      localStorage.getItem("msg") == ""
+    ) {
+      this.$store.state.status = false;
+      // this.$router.push({ path: "/" });
+    } else {
+      this.$store.state.status = true;
+    }
+  },
   methods: {
+    ac_login() {
+      this.$router.push({ path: "/" });
+    },
     submitUpload() {
       this.$refs.upload.submit();
     },
     handleRemove(file, fileList) {},
     handlePreview(file) {},
+    on_change(file, fileList) {
+      // console.log(file);
+    },
     success_(response, file, fileList) {
-      if (response) {
+      // console.log(response);
+      var that = this;
+      if (response.message == "success") {
         new Promise((resolve, reject) => {
           let param = []; // 定义变量保存文字的y值
           response.resultData.map(value => {
@@ -91,13 +125,15 @@ export default {
             this.img_list.unshift(response.url);
           });
       } else {
-        this.$alert("加载失败", "提示", {
+        this.$alert(response, "提示", {
           confirmButtonText: "确定",
           callback: action => {
             // this.$message({
             //   type: "info",
             //   message: `action: ${action}`
             // });
+            that.loading = false;
+            that.$router.push({ path: "/" });
           }
         });
       }
@@ -116,6 +152,9 @@ export default {
       }
     },
     beforeUpload(file) {
+      this.u_msg = JSON.parse(localStorage.getItem("msg"));
+      this.token.authorization = localStorage.getItem("token");
+      // console.log(this.u_msg, this.token);
       // 图片不大于4m,宽度不大于2000
       return new Promise((resolve, reject) => {
         let _URL = window.URL || window.webkitURL;
@@ -157,6 +196,11 @@ export default {
 }
 .title {
   text-align: center;
+}
+.title_p {
+  font-size: 12px;
+  text-align: center;
+  color: #333;
 }
 ul {
   list-style: none;

@@ -8,13 +8,13 @@ import router from './router'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import store from './store'
-import install from './api/ajax'
+import ajax from './api/ajax'
 import intercept from './api/lanjie'
 Vue.use(VueAxios, axios);
 Vue.use(Element)
 Vue.use(Element, { size: 'small' })
 Vue.config.productionTip = false
-Vue.use(install);
+Vue.use(ajax);
 intercept();
 
 
