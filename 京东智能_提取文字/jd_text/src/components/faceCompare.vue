@@ -1,24 +1,20 @@
 <template>
-  <div
-    v-loading="loading"
-    element-loading-text="拼命加载中"
-    element-loading-spinner="el-icon-loading"
-    element-loading-background="rgba(0, 0, 0, 0.8)"
-  >
+  <div>
     <div class="updata">
-      <h1 class="title">识别图片文字</h1>
+      <h1 class="title">人脸对比程序</h1>
       <div v-if="!this.$store.state.status">
         <p class="title_p">您还未登录</p>
         <p class="title_p">登录后才可使用该功能</p>
         <el-button type="primary" @click="ac_login">立即登录</el-button>
       </div>
+      <h3>{{title_text}}</h3>
       <el-upload
         class="upload-demo"
         ref="upload"
-        :action="this.$store.state.api+'/user/fileImg'"
+        :action="this.$store.state.api+'/user/autoImg'"
         :on-preview="handlePreview"
         :on-remove="handleRemove"
-        :auto-upload="false"
+        :auto-upload="true"
         :on-success="success_"
         :on-error="error_"
         :before-upload="beforeUpload"
@@ -26,38 +22,17 @@
         :data="u_msg"
         :headers="token"
         :on-change="on_change"
+        list-type="picture-card"
         v-if="this.$store.state.status"
+        :limit="2"
+        :on-exceed="exceed_"
       >
-        <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
-        <el-button
-          style="margin-left: 10px;"
-          size="small"
-          type="success"
-          @click="submitUpload"
-        >识别图片中的文字</el-button>
-        <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+        <i class="el-icon-plus"></i>
       </el-upload>
+      <el-button v-if="compare_btn" class="face_btn" @click="face_btn" type="primary">立即对比</el-button>
+      <!-- <img v-for="isq in img_base" :src="isq" alt=""> -->
+      <img :src="img_base" alt="">
     </div>
-
-    <ul class="up_ul">
-      <li class="up_li" v-for="(it,i) in img_msg" :key="i">
-        <h3>{{it.originalname}}</h3>
-        <div class="look_img_btn">
-          <el-button v-if="i!==i_num" style="margin-top:20px" type="primary" @click="look_img(i)">查看第{{i+1}}张原图</el-button>
-          <el-button v-if="i==i_num" style="margin-top:20px" type="primary" @click="close_img">关闭第{{i+1}}张原图</el-button>
-        </div>
-        <el-image
-          style="width: 50%;"
-          v-show="i==i_num"
-          :src="it.url"
-          :alt="it.filename"
-          :preview-src-list="img_list"
-        ></el-image>
-        <ul class="up_list">
-          <li class="up_list_li" v-for="(is,j) in it.resultData" :key="j">{{is.text}}</li>
-        </ul>
-      </li>
-    </ul>
   </div>
 </template>
  
@@ -66,14 +41,15 @@ import imageConversion from "image-conversion";
 export default {
   data() {
     return {
-      img_msg: [],
-      img_list: [],
       loading: false,
       u_msg: {},
       token: {
         authorization: ""
       },
-      i_num: -1
+      url_list: [],
+      title_text: "点击上传图片",
+      compare_btn: false,
+      img_base:[]
     };
   },
   mounted() {
@@ -110,11 +86,26 @@ export default {
     }
   },
   methods: {
-    close_img() {
-      this.i_num = -1;
+    face_btn() {
+        var that = this;
+      this.ajax
+        .readToken(
+          "/user/imgCompare",
+          { img_data: this.url_list },
+          localStorage.getItem("token")
+        )
+        .then(res => {
+            that.img_base = res;
+          console.log(res);
+        });
     },
-    look_img(i) {
-      this.i_num = i;
+    exceed_(files, fileList) {
+      if (files) {
+        this.$alert("已经上传两张图片，现在可以进行对比啦！", "提示", {
+          confirmButtonText: "确定",
+          callback: action => {}
+        });
+      }
     },
     ac_login() {
       this.$router.push({ path: "/login" });
@@ -128,51 +119,30 @@ export default {
       // console.log(file);
     },
     success_(response, file, fileList) {
-      // console.log(response);
       var that = this;
-      if (response.message == "success") {
-        new Promise((resolve, reject) => {
-          let param = []; // 定义变量保存文字的y值
-          response.resultData.map(value => {
-            param.push(value.location.y); //获取y值push进去
-          });
-          let newArr = param.sort(function(a, b) {
-            return a - b;
-          });
-          resolve(newArr);
-        })
-          .then(newArr => {
-            var newMsg = [];
-            for (var i = 0; i < newArr.length; i++) {
-              // 循环原数组
-              for (var j = 0; j < response.resultData.length; j++) {
-                // 原数组的y值与排序后数组的y值进行对比
-                if (response.resultData[j].location.y == newArr[i]) {
-                  //如果结果值的y值等于排序后的y值 push进去msg
-                  newMsg.push(response.resultData[j]);
-                }
-              }
-            }
-            return newMsg;
-          })
-          .then(newMsg => {
-            this.loading = false;
-            response.resultData = newMsg;
-            this.img_msg.unshift(response);
-            this.img_list.unshift(response.url);
-          });
+      if (response.path) {
+        var img_url_ = [];
+        for (let j in fileList) {
+            img_url_.push(fileList[j].response.url);
+        }
+        this.url_list = img_url_;
+        console.log(this.url_list);
+        if (this.url_list.length == 0) {
+          this.title_text = "点击上传图片";
+          this.compare_btn = false;
+        } else if (this.url_list.length == 1) {
+          this.title_text = "请上传第二张图片";
+          this.compare_btn = false;
+        } else if (this.url_list.length == 2) {
+          this.title_text = "现在可以进行对比啦";
+          this.compare_btn = true;
+        } else {
+          this.title_text = "最多只能上传两张图片";
+        }
       } else {
-        this.$alert(response, "提示", {
+        this.$alert("上传失败，请重新上传", "提示", {
           confirmButtonText: "确定",
-          callback: action => {
-            // this.$message({
-            //   type: "info",
-            //   message: `action: ${action}`
-            // });
-            that.loading = false;
-            that.$router.push({ path: "/login" });
-            localStorage.removeItem("token");
-          }
+          callback: action => {}
         });
       }
     },
@@ -180,12 +150,7 @@ export default {
       if (err) {
         this.$alert("图片上传失败", "提示", {
           confirmButtonText: "确定",
-          callback: action => {
-            // this.$message({
-            //   type: "info",
-            //   message: `action: ${action}`
-            // });
-          }
+          callback: action => {}
         });
       }
     },
@@ -220,17 +185,14 @@ export default {
         img.src = _URL.createObjectURL(file);
       });
     },
-    progress(event, file, fileList) {
-      // console.log(event);
-      this.loading = true;
-    }
+    progress(event, file, fileList) {}
   }
 };
 </script>
  
 <style scoped lang='less'>
-.look_img_btn{
-  margin-bottom: 20px;
+.face_btn {
+  margin-top: 20px;
 }
 .updata {
   width: 100%;

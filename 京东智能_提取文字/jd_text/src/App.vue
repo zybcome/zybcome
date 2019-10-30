@@ -18,4 +18,8 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
+.el-message-box {
+      width: 100% !important;
+      max-width: 420px !important;
+}
 </style>

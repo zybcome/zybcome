@@ -3,7 +3,9 @@ import Router from 'vue-router'
 import Index from '@/components/index'
 import UpLoad from '@/components/upload'
 import Login from '@/components/login'
+import QuryImg from '@/components/quryImg'
 import Register from '@/components/register'
+import FaceCompare from '@/components/faceCompare'
 
 Vue.use(Router)
 
@@ -11,23 +13,33 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Login',
-      component: Login
+      name: 'Index',
+      component: Index
     },
     {
-      path: '/UpLoad',
+      path: '/upLoad',
       name: 'UpLoad',
       component: UpLoad
     },
     {
-      path: '/Register',
+      path: '/register',
       name: 'Register',
       component: Register
     },
     {
-      path: '/Index',
-      name: 'Index',
-      component: Index
+      path: '/login',
+      name: 'Login',
+      component: Login
+    },
+    {
+      path: '/quryImg',
+      name: 'QuryImg',
+      component: QuryImg
+    },
+    {
+      path: '/faceCompare',
+      name: 'FaceCompare',
+      component: FaceCompare
     }
   ]
 })

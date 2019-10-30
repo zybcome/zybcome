@@ -10,11 +10,11 @@ import md5 from 'js-md5';
 import Element from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import store from "./store/index.js";
-// import ajax from "./api/ajax.js";
+import ajax from "./api/ajax.js";
 Vue.prototype.$md5 = md5;
 Vue.use(VueAxios, axios);
 Vue.use(Element);
-// Vue.use(ajax);
+Vue.use(ajax);
 Vue.use(Element, { size: 'small' });
 Vue.config.productionTip = false;
 
@@ -26,4 +26,5 @@ export default new Vue({
   components: { App },
   template: '<App/>'
 })
+
 
