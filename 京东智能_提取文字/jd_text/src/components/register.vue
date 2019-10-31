@@ -53,22 +53,28 @@ export default {
     var phoneReg = /^[1][3,4,5,6,7,8,9][0-9]{9}$/;
     var validateName = (rule, value, callback) => {
       if (!nameReg.test(value)) {
+        this.u_name_1 = false;
         callback(new Error("格式有误(由数字或字母或下划线组成)"));
       } else {
+        this.u_name_1 = true;
         callback();
       }
     };
     var validatePhone = (rule, value, callback) => {
-      if (!pswReg.test(value)) {
+      if (!phoneReg.test(value)) {
+        this.u_phone_1 = false;
         callback(new Error("格式有误(11位有效手机号码)"));
       } else {
+        this.u_phone_1 = true;
         callback();
       }
     };
     var validatePsw = (rule, value, callback) => {
-      if (!nameReg.test(value)) {
+      if (!pswReg.test(value)) {
+        this.u_psw_1 = false;
         callback(new Error("格式有误(以字母开头，长度在6-18之间)"));
       } else {
+        this.u_psw_1 = true;
         callback();
       }
     };
@@ -76,7 +82,10 @@ export default {
       form: {
         u_name: "",
         u_psw: "",
-        u_phone: ""
+        u_phone: "",
+        u_name_1: false,
+        u_psw_1: false,
+        u_phone_1: false
       },
       // 校验规则
       rules: {
@@ -99,32 +108,67 @@ export default {
   methods: {
     register() {
       var that = this;
-      this.axios
-        .post(that.$store.state.api + "/register", {
-          u_name: that.form.u_name,
-          u_psw: that.form.u_psw,
-          u_phone: that.form.u_phone
-        })
-        .then(function(res) {
-          if (res.data == 1) {
-            that
-              .$confirm("恭喜您注册成功，是否立即登录？", "", {
+      if (
+        that.u_name_1 == true &&
+        that.u_phone_1 == true &&
+        that.u_psw_1 == true
+      ) {
+        this.axios
+          .post(that.$store.state.api + "/register", {
+            u_name: that.form.u_name,
+            u_psw: that.form.u_psw,
+            u_phone: that.form.u_phone
+          })
+          .then(function(res) {
+            if (res.data == 1) {
+              that
+                .$confirm("恭喜您注册成功，是否立即登录？", "", {
+                  confirmButtonText: "确定",
+                  cancelButtonText: "取消"
+                })
+                .then(() => {
+                  that.$router.push({ path: "/login" });
+                })
+                .catch(() => {
+                  that.$message({
+                    type: "info",
+                    message: "已取消"
+                  });
+                });
+            } else {
+              that.$alert("用户名或手机号已存在", "注册失败", {
                 confirmButtonText: "确定",
-                cancelButtonText: "取消"
-              })
-              .then(() => {
-                that.$router.push({ path: "/login" });
-              })
-              .catch(() => {
+                callback: action => {
+                  that.$message({
+                    type: "info",
+                    message: `请重新填写`
+                  });
+                }
+              });
+            }
+          })
+          .catch(function(err) {
+            that.$alert(err, "注册失败", {
+              confirmButtonText: "确定",
+              callback: action => {
                 that.$message({
                   type: "info",
-                  message: "已取消"
+                  message: `请重新填写`
                 });
-              });
-          } else {
+              }
+            });
+          });
+      } else {
+        that.$alert("输入格式不正确", "注册失败", {
+          confirmButtonText: "确定",
+          callback: action => {
+            that.$message({
+              type: "info",
+              message: `请重新填写`
+            });
           }
-        })
-        .catch(function(err) {});
+        });
+      }
     }
   }
 };
